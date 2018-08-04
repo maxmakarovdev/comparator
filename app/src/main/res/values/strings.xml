@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Comparator</string>
+
+    <string name="templates_title">TemplatesFragment</string>
+</resources>
