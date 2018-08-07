@@ -9,6 +9,9 @@ interface ItemAttributeDetailDao {
     @Insert
     fun insert(itemAttributeDetail: ItemAttributeDetail): Long
 
+    @Insert
+    fun insertAll(itemAttributeDetails: List<ItemAttributeDetail>): Long
+
     @Update
     fun update(itemAttributeDetail: ItemAttributeDetail)
 

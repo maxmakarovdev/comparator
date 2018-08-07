@@ -9,6 +9,9 @@ interface ItemDao {
     @Insert
     fun insert(item: Item): Long
 
+    @Insert
+    fun insertAll(items: List<Item>): Long
+
     @Update
     fun update(item: Item)
 

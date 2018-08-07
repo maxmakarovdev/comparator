@@ -10,6 +10,9 @@ interface AttributeDao {
     @Insert
     fun insert(attribute: Attribute): Long
 
+    @Insert
+    fun insertAll(attributes: List<Attribute>): Long
+
     @Update
     fun update(attribute: Attribute)
 

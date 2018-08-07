@@ -18,9 +18,4 @@ interface TemplateDao {
 
     @Query("SELECT * FROM templates")
     fun getTemplates(): LiveData<List<Template>>
-
-
-    fun addTemplate(template: Template, attributes: HashMap<AttributeGroup, List<Attribute>>){
-        //todo
-    }
 }

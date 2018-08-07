@@ -12,6 +12,9 @@ interface AttributeGroupDao {
     @Insert
     fun insert(attributeGroup: AttributeGroup): Long
 
+    @Insert
+    fun insertAll(attributeGroups: List<AttributeGroup>): Long
+
     @Update
     fun update(attributeGroup: AttributeGroup)
 
