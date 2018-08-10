@@ -7,7 +7,7 @@ import com.maximmakarov.comparator.data.item.ItemAttributeDetail
 import com.maximmakarov.comparator.data.template.Template
 
 
-val PREPOPULATE_TEMPLATE = Template(1, "Smartphone")
+val PREPOPULATE_TEMPLATE = Template(1, "Smartphones")
 
 val PREPOPULATE_GROUPS = listOf(
         AttributeGroup(1, 1, "Performance"),

@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "name": "Samsung Galaxy S9 Plus",
+      "score": 9.34,
+      "color": "#33FF00"
+    },
+    {
+      "name": "Huawei P20 Pro",
+      "score": 9.11,
+      "color": "#66FF00"
+    },
+    {
+      "name": "iPhone X",
+      "score": 8.77,
+      "color": "#99FF00"
+    },
+    {
+      "name": "Samsung Galaxy S9",
+      "score": 8.45,
+      "color": "#CCFF00"
+    },
+    {
+      "name": "LG G7 ThinQ",
+      "score": 8.32,
+      "color": "#FFFF00"
+    },
+    {
+      "name": "Huawei Mate 10 Pro",
+      "score": 8.01,
+      "color": "#FFCC00"
+    },
+    {
+      "name": "Samsung Galaxy Note 8",
+      "score": 7.47,
+      "color": "#FF8800"
+    },
+    {
+      "name": "Google Pixel 2 XL",
+      "score": 6.25,
+      "color": "#FF3300"
+    }
+  ]
+}
