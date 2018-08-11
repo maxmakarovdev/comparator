@@ -3,23 +3,13 @@ package com.maximmakarov.comparator.data.attribute
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.room.*
+import com.maximmakarov.comparator.data.BaseDao
 import com.maximmakarov.comparator.data.item.Item
 import com.maximmakarov.comparator.data.item.ItemAttributeDetail
 
 
 @Dao
-interface AttributeGroupDao {
-    @Insert
-    fun insert(attributeGroup: AttributeGroup): Long
-
-    @Insert
-    fun insertAll(attributeGroups: List<AttributeGroup>): Long
-
-    @Update
-    fun update(attributeGroup: AttributeGroup)
-
-    @Delete
-    fun delete(attributeGroup: AttributeGroup)
+interface AttributeGroupDao : BaseDao<AttributeGroup> {
 
     @Transaction
     @Query("SELECT * FROM attribute_groups WHERE template_id = :templateId")

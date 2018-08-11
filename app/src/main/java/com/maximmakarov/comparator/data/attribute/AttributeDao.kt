@@ -1,21 +1,7 @@
 package com.maximmakarov.comparator.data.attribute
 
 import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Update
+import com.maximmakarov.comparator.data.BaseDao
 
 @Dao
-interface AttributeDao {
-    @Insert
-    fun insert(attribute: Attribute): Long
-
-    @Insert
-    fun insertAll(attributes: List<Attribute>): Long
-
-    @Update
-    fun update(attribute: Attribute)
-
-    @Delete
-    fun delete(attribute: Attribute)
-}
+interface AttributeDao : BaseDao<Attribute>
