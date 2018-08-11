@@ -19,7 +19,6 @@ class TemplatesFragment : BaseFragment() {
     private lateinit var viewModel: TemplatesViewModel
     private lateinit var adapter: TemplateAdapter
 
-
     override fun initView() {
         adapter = TemplateAdapter()
         templates.adapter = adapter
@@ -32,6 +31,6 @@ class TemplatesFragment : BaseFragment() {
     }
 
     override fun subscribeUi() {
-        viewModel.templates.observe(this, Observer { adapter.submitList(it) })
+        viewModel.getTemplates().observe(this, Observer { adapter.submitList(it) })
     }
 }

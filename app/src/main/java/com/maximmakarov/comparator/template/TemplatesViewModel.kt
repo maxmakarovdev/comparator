@@ -9,5 +9,5 @@ class TemplatesViewModel : ViewModel(), KoinComponent {
 
     private val dao: TemplateDao by inject()
 
-    val templates = dao.getTemplates()
+    fun getTemplates() = dao.getTemplates()
 }
