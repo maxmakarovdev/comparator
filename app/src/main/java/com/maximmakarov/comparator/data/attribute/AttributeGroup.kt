@@ -1,14 +1,12 @@
 package com.maximmakarov.comparator.data.attribute
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.maximmakarov.comparator.data.template.Template
 
 
 @Entity(tableName = "attribute_groups",
-        foreignKeys = [ForeignKey(entity = Template::class, parentColumns = ["id"], childColumns = ["template_id"])])
+        indices = [Index("template_id")],
+        foreignKeys = [ForeignKey(entity = Template::class, parentColumns = ["id"], childColumns = ["template_id"], onDelete = ForeignKey.CASCADE)])
 class AttributeGroup(
         @PrimaryKey(autoGenerate = true)
         val id: Int? = null,

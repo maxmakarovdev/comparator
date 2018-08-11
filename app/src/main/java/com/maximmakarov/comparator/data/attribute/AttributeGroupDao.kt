@@ -11,7 +11,7 @@ import com.maximmakarov.comparator.data.item.ItemAttributeDetail
 @Dao
 interface AttributeGroupDao : BaseDao<AttributeGroup> {
 
-    @Transaction
+    /*@Transaction
     @Query("SELECT * FROM attribute_groups WHERE template_id = :templateId")
     fun getGroupsWithAttributes(templateId: Int): LiveData<List<GroupWithAttributes>>
 
@@ -22,11 +22,11 @@ interface AttributeGroupDao : BaseDao<AttributeGroup> {
     fun getItemData(item: Item): LiveData<List<GroupWithAttributesWithDetails>> =
             Transformations.map(getGroupsWithAttributesWithDetails(item.templateId)) {
                 it.filter { it.attributesWithDetails.filter { it.details[0].itemId != item.id }.isEmpty() }
-            }
+            }*/
 }
 
 
-class GroupWithAttributes {
+/*class GroupWithAttributes {
     @Embedded
     var group: AttributeGroup? = null
 
@@ -48,4 +48,4 @@ class GroupWithAttributesWithDetails {
 
     @Relation(parentColumn = "id", entityColumn = "group_id")
     var attributesWithDetails: List<AttributesWithDetails> = arrayListOf()
-}
+}*/

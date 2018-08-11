@@ -9,13 +9,13 @@ import com.maximmakarov.comparator.data.template.Template
 
 val PREPOPULATE_TEMPLATE = Template(1, "Smartphones")
 
-val PREPOPULATE_GROUPS = listOf(
+val PREPOPULATE_GROUPS = arrayOf(
         AttributeGroup(1, 1, "Performance"),
         AttributeGroup(2, 1, "Screen"),
         AttributeGroup(3, 1, "Battery"),
         AttributeGroup(4, 1, "Camera")
 )
-val PREPOPULATE_ATTRIBUTES = listOf(
+val PREPOPULATE_ATTRIBUTES = arrayOf(
         Attribute(1, 1, "CPU", true),
         Attribute(2, 1, "RAM", false),
         Attribute(3, 1, "Storage", false),
@@ -26,12 +26,12 @@ val PREPOPULATE_ATTRIBUTES = listOf(
         Attribute(8, 4, "Rear camera", false),
         Attribute(9, 4, "Front camera", false)
 )
-val PREPOPULATE_ITEMS = listOf(
+val PREPOPULATE_ITEMS = arrayOf(
         Item(1, 1, "Samsung Galaxy S9 Plus"),
         Item(2, 1, "Huawei P20 Pro"),
         Item(3, 1, "iPhone X")
 )
-val PREPOPULATE_ITEMS_DATA = listOf(
+val PREPOPULATE_ITEMS_DATA = arrayOf(
         ItemAttributeDetail(1, 1, 1, "Snapdragon 845 / Exynos 9810", 9),
         ItemAttributeDetail(2, 1, 2, "6GB", 9),
         ItemAttributeDetail(3, 1, 3, "64GB/128GB", 8),

@@ -13,10 +13,10 @@ class PrePopulateDatabaseWorker : Worker(), KoinComponent {
     override fun doWork(): Worker.Result {
         return try {
             db.templateDao().insert(PREPOPULATE_TEMPLATE)
-            db.attributeGroupDao().insertAll(PREPOPULATE_GROUPS)
-            db.attributeDao().insertAll(PREPOPULATE_ATTRIBUTES)
-            db.itemDao().insertAll(PREPOPULATE_ITEMS)
-            db.itemDataDao().insertAll(PREPOPULATE_ITEMS_DATA)
+            db.attributeGroupDao().insert(*PREPOPULATE_GROUPS)
+            db.attributeDao().insert(*PREPOPULATE_ATTRIBUTES)
+            db.itemDao().insert(*PREPOPULATE_ITEMS)
+            db.itemDataDao().insert(*PREPOPULATE_ITEMS_DATA)
 
             Worker.Result.SUCCESS
         } catch (ex: Exception) {

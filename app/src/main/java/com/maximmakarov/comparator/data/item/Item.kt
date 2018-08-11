@@ -1,14 +1,12 @@
 package com.maximmakarov.comparator.data.item
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.maximmakarov.comparator.data.template.Template
 
 
 @Entity(tableName = "items",
-        foreignKeys = [ForeignKey(entity = Template::class, parentColumns = ["id"], childColumns = ["template_id"])])
+        indices = [Index("template_id")],
+        foreignKeys = [ForeignKey(entity = Template::class, parentColumns = ["id"], childColumns = ["template_id"], onDelete = ForeignKey.CASCADE)])
 class Item(
         @PrimaryKey(autoGenerate = true)
         val id: Int? = null,
