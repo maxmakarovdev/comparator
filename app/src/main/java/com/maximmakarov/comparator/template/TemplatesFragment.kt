@@ -1,30 +1,37 @@
 package com.maximmakarov.comparator.template
 
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.maximmakarov.comparator.BaseFragment
 import com.maximmakarov.comparator.R
+import kotlinx.android.synthetic.main.templates_fragment.*
 
-class TemplatesFragment : Fragment() {
+class TemplatesFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = TemplatesFragment()
     }
 
+    override val layoutId = R.layout.templates_fragment
+
     private lateinit var viewModel: TemplatesViewModel
+    private lateinit var adapter: TemplateAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.templates_fragment, container, false)
+
+    override fun initView() {
+        adapter = TemplateAdapter()
+        templates.adapter = adapter
+        templates.itemAnimator = DefaultItemAnimator()
+        templates.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(TemplatesViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
+    override fun subscribeUi() {
+        viewModel.templates.observe(this, Observer { adapter.submitList(it) })
+    }
 }
