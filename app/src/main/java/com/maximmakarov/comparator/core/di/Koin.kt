@@ -1,6 +1,8 @@
 package com.maximmakarov.comparator.core.di
 
 import com.maximmakarov.comparator.data.AppDatabase
+import com.maximmakarov.comparator.data.item.ItemRepository
+import com.maximmakarov.comparator.data.template.TemplateRepository
 import org.koin.dsl.module.applicationContext
 
 
@@ -10,10 +12,7 @@ val appModule = applicationContext {
 }
 
 val dataModule = applicationContext {
-    //todo add repository layer
-    bean { get<AppDatabase>().templateDao() }
-    bean { get<AppDatabase>().itemDao() }
-    bean { get<AppDatabase>().itemDataDao() }
-    bean { get<AppDatabase>().attributeGroupDao() }
-    bean { get<AppDatabase>().attributeDao() }
+    bean { TemplateRepository(get()) }
+    bean { ItemRepository(get()) }
+
 }

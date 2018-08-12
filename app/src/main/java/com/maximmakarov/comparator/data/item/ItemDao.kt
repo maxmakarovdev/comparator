@@ -9,5 +9,5 @@ import com.maximmakarov.comparator.data.BaseDao
 interface ItemDao : BaseDao<Item> {
 
     @Query("SELECT * FROM items WHERE template_id = :templateId")
-    fun getTemplateItems(templateId: Int): LiveData<List<Item>>
+    fun getItems(templateId: Int): LiveData<List<Item>>
 }
