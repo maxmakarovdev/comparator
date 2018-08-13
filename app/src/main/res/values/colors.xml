@@ -8,4 +8,6 @@
     <color name="text_secondary">#444444</color>
 
     <color name="background">#f0f0f0</color>
+
+    <color name="white">#ffffff</color>
 </resources>

@@ -12,12 +12,12 @@ import com.maximmakarov.comparator.data.item.*
 import com.maximmakarov.comparator.data.template.*
 
 
-@Database(entities = [Template::class, Item::class, ItemAttributeDetail::class, Attribute::class, AttributeGroup::class],
+@Database(entities = [Template::class, Item::class, ItemAttrData::class, Attribute::class, AttributeGroup::class],
         version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun templateDao(): TemplateDao
     abstract fun itemDao(): ItemDao
-    abstract fun itemDataDao(): ItemAttributeDetailDao
+    abstract fun itemAttrDataDao(): ItemAttrDataDao
     abstract fun attributeDao(): AttributeDao
     abstract fun attributeGroupDao(): AttributeGroupDao
 

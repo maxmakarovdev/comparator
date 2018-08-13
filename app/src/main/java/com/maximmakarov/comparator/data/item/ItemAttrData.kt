@@ -10,17 +10,17 @@ import com.maximmakarov.comparator.data.attribute.Attribute
             ForeignKey(entity = Item::class, parentColumns = ["id"], childColumns = ["item_id"], onDelete = ForeignKey.CASCADE),
             ForeignKey(entity = Attribute::class, parentColumns = ["id"], childColumns = ["attribute_id"], onDelete = ForeignKey.SET_NULL)
         ])
-class ItemAttributeDetail(
+class ItemAttrData(
         @PrimaryKey(autoGenerate = true)
-        val id: Int? = null,
+        var id: Int? = null,
 
         @ColumnInfo(name = "item_id")
-        val itemId: Int,
+        var itemId: Int = 0,
 
         @ColumnInfo(name = "attribute_id")
-        val attributeId: Int,
+        var attributeId: Int = 0,
 
-        val answer: String,
+        var answer: String = "",
 
-        val score: Int? = null
+        var score: Int? = null
 )

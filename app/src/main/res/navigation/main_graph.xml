@@ -33,13 +33,33 @@
             android:name="templateId"
             android:defaultValue="0"
             app:argType="integer"/>
+        <action
+            android:id="@+id/action_add_or_view_item"
+            app:destination="@id/formFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/templateDetailFragment"
-        android:name="com.maximmakarov.comparator.template.add.TemplateDetailFragment"
+        android:name="com.maximmakarov.comparator.template.detail.TemplateDetailFragment"
         android:label="TemplateDetailFragment">
         <argument
             android:name="templateId"
+            android:defaultValue="0"
+            app:argType="integer"/>
+    </fragment>
+    <fragment
+        android:id="@+id/formFragment"
+        android:name="com.maximmakarov.comparator.item.form.FormFragment"
+        android:label="FormFragment">
+        <argument
+            android:name="templateId"
+            android:defaultValue="0"
+            app:argType="integer"/>
+        <argument
+            android:name="itemId"
             android:defaultValue="0"
             app:argType="integer"/>
     </fragment>

@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +28,18 @@ class ItemAdapter : ListAdapter<Item, ItemAdapter.ViewHolder>(ItemAdapter.DiffCa
                 score.text = it.score.toString()
                 score.setTextColor(ArgbEvaluator().evaluate(
                         (it.score?.toFloat() ?: 0f) / 10f, Color.RED, Color.GREEN) as Int)
-                edit.onClick { }
+                item.onClick {
+                    //val action = ItemsFragmentDirections.actionSelectTemplate()
+                    //action.setTemplateId(it.id!!)
+                    //findNavController().navigate(action)
+                }
+
+                edit.onClick {
+                    val action = ItemsFragmentDirections.actionAddOrViewItem()
+                    action.setTemplateId(it.templateId)
+                    action.setItemId(it.id!!)
+                    findNavController().navigate(action)
+                }
             }
         }
     }

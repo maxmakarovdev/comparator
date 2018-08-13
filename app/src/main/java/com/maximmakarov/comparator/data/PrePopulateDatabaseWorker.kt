@@ -16,7 +16,7 @@ class PrePopulateDatabaseWorker : Worker(), KoinComponent {
             db.attributeGroupDao().insert(*PREPOPULATE_GROUPS)
             db.attributeDao().insert(*PREPOPULATE_ATTRIBUTES)
             db.itemDao().insert(*PREPOPULATE_ITEMS)
-            db.itemDataDao().insert(*PREPOPULATE_ITEMS_DATA)
+            db.itemAttrDataDao().insert(*PREPOPULATE_ITEMS_DATA)
 
             Worker.Result.SUCCESS
         } catch (ex: Exception) {

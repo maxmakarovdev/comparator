@@ -6,8 +6,8 @@ import com.maximmakarov.comparator.data.BaseDao
 
 
 @Dao
-interface ItemAttributeDetailDao : BaseDao<ItemAttributeDetail> {
+interface ItemAttrDataDao : BaseDao<ItemAttrData> {
 
     @Query("SELECT * FROM attributes_details WHERE item_id = :itemId")
-    fun getItemAttributeDetails(itemId: Int): LiveData<List<ItemAttributeDetail>>
+    fun getItemAttributeDetails(itemId: Int): LiveData<List<ItemAttrData>>
 }

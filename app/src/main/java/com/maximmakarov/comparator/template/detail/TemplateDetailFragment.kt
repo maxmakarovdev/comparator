@@ -1,4 +1,4 @@
-package com.maximmakarov.comparator.template.add
+package com.maximmakarov.comparator.template.detail
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
