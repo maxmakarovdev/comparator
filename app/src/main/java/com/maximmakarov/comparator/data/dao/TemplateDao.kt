@@ -1,9 +1,9 @@
-package com.maximmakarov.comparator.data.template
+package com.maximmakarov.comparator.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
-import com.maximmakarov.comparator.data.BaseDao
+import com.maximmakarov.comparator.data.model.Template
 
 @Dao
 interface TemplateDao : BaseDao<Template> {

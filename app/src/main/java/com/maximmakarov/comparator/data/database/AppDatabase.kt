@@ -1,4 +1,4 @@
-package com.maximmakarov.comparator.data
+package com.maximmakarov.comparator.data.database
 
 import android.content.Context
 import androidx.room.RoomDatabase
@@ -7,9 +7,8 @@ import androidx.room.Room
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.maximmakarov.comparator.data.attribute.*
-import com.maximmakarov.comparator.data.item.*
-import com.maximmakarov.comparator.data.template.*
+import com.maximmakarov.comparator.data.dao.*
+import com.maximmakarov.comparator.data.model.*
 
 
 @Database(entities = [Template::class, Item::class, ItemAttrData::class, Attribute::class, AttributeGroup::class],

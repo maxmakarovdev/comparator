@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.ext.onClick
-import com.maximmakarov.comparator.data.template.Template
+import com.maximmakarov.comparator.data.model.Template
 import kotlinx.android.synthetic.main.template_item.view.*
 
 

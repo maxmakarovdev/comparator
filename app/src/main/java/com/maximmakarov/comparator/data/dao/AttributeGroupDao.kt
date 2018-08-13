@@ -1,8 +1,9 @@
-package com.maximmakarov.comparator.data.attribute
+package com.maximmakarov.comparator.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.maximmakarov.comparator.data.BaseDao
+import com.maximmakarov.comparator.data.model.Attribute
+import com.maximmakarov.comparator.data.model.AttributeGroup
 
 
 @Dao

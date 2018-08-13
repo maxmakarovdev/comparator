@@ -1,4 +1,4 @@
-package com.maximmakarov.comparator.data
+package com.maximmakarov.comparator.data.database
 
 import android.util.Log
 import androidx.work.Worker

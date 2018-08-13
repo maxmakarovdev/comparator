@@ -1,10 +1,10 @@
-package com.maximmakarov.comparator.data
+package com.maximmakarov.comparator.data.database
 
-import com.maximmakarov.comparator.data.attribute.Attribute
-import com.maximmakarov.comparator.data.attribute.AttributeGroup
-import com.maximmakarov.comparator.data.item.Item
-import com.maximmakarov.comparator.data.item.ItemAttrData
-import com.maximmakarov.comparator.data.template.Template
+import com.maximmakarov.comparator.data.model.Attribute
+import com.maximmakarov.comparator.data.model.AttributeGroup
+import com.maximmakarov.comparator.data.model.Item
+import com.maximmakarov.comparator.data.model.ItemAttrData
+import com.maximmakarov.comparator.data.model.Template
 
 
 val PREPOPULATE_TEMPLATE = Template(1, "Smartphones")

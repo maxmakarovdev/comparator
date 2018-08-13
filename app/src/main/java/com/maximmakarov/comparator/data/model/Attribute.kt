@@ -1,4 +1,4 @@
-package com.maximmakarov.comparator.data.attribute
+package com.maximmakarov.comparator.data.model
 
 import androidx.room.*
 

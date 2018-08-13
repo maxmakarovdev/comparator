@@ -1,8 +1,8 @@
 package com.maximmakarov.comparator.core.di
 
-import com.maximmakarov.comparator.data.AppDatabase
-import com.maximmakarov.comparator.data.item.ItemRepository
-import com.maximmakarov.comparator.data.template.TemplateRepository
+import com.maximmakarov.comparator.data.database.AppDatabase
+import com.maximmakarov.comparator.data.repository.ItemRepository
+import com.maximmakarov.comparator.data.repository.TemplateRepository
 import org.koin.dsl.module.applicationContext
 
 

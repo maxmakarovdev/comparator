@@ -1,4 +1,4 @@
-package com.maximmakarov.comparator
+package com.maximmakarov.comparator.core
 
 import android.os.Bundle
 import android.view.LayoutInflater

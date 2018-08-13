@@ -6,10 +6,10 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.tabs.TabLayout
-import com.maximmakarov.comparator.BaseFragment
+import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.R
-import com.maximmakarov.comparator.data.attribute.AttributeGroup
-import com.maximmakarov.comparator.data.item.ItemDataWithAttr
+import com.maximmakarov.comparator.data.model.AttributeGroup
+import com.maximmakarov.comparator.data.repository.ItemDataWithAttr
 import kotlinx.android.synthetic.main.form_fragment.*
 
 class FormFragment : BaseFragment() {

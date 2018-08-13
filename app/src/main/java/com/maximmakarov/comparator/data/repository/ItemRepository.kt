@@ -1,11 +1,12 @@
-package com.maximmakarov.comparator.data.item
+package com.maximmakarov.comparator.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.maximmakarov.comparator.data.AppDatabase
-import com.maximmakarov.comparator.data.attribute.Attribute
-import com.maximmakarov.comparator.data.attribute.AttributeGroup
-import com.maximmakarov.comparator.data.attribute.GroupWithAttributes
+import com.maximmakarov.comparator.data.database.AppDatabase
+import com.maximmakarov.comparator.data.model.Attribute
+import com.maximmakarov.comparator.data.model.AttributeGroup
+import com.maximmakarov.comparator.data.dao.GroupWithAttributes
+import com.maximmakarov.comparator.data.model.ItemAttrData
 
 class ItemRepository(private val db: AppDatabase) {
 

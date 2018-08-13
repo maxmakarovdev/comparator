@@ -1,18 +1,19 @@
-package com.maximmakarov.comparator.data.attribute
+package com.maximmakarov.comparator.data.model
 
 import androidx.room.*
-import com.maximmakarov.comparator.data.template.Template
 
 
-@Entity(tableName = "attribute_groups",
+@Entity(tableName = "items",
         indices = [Index("template_id")],
         foreignKeys = [ForeignKey(entity = Template::class, parentColumns = ["id"], childColumns = ["template_id"], onDelete = ForeignKey.CASCADE)])
-class AttributeGroup(
+class Item(
         @PrimaryKey(autoGenerate = true)
         val id: Int? = null,
 
         @ColumnInfo(name = "template_id")
         val templateId: Int,
 
-        val name: String
+        val name: String,
+
+        val score: Double? = null
 )

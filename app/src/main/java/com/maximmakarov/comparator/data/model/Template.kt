@@ -1,4 +1,4 @@
-package com.maximmakarov.comparator.data.template
+package com.maximmakarov.comparator.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

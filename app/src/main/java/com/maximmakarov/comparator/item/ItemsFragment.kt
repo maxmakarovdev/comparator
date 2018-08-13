@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.maximmakarov.comparator.BaseFragment
+import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.ext.onClick
 import kotlinx.android.synthetic.main.items_fragment.*

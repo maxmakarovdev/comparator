@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.ext.onClick
-import com.maximmakarov.comparator.data.item.Item
+import com.maximmakarov.comparator.data.model.Item
 import kotlinx.android.synthetic.main.item_item.view.*
 import org.koin.standalone.KoinComponent
 

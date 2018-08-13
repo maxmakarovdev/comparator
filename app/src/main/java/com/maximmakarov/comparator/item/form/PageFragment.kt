@@ -1,6 +1,6 @@
 package com.maximmakarov.comparator.item.form
 
-import com.maximmakarov.comparator.BaseFragment
+import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.R
 
 

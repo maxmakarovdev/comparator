@@ -1,4 +1,4 @@
-package com.maximmakarov.comparator.data
+package com.maximmakarov.comparator.data.dao
 
 import androidx.room.Delete
 import androidx.room.Insert

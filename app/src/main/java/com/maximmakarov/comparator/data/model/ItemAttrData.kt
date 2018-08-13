@@ -1,7 +1,6 @@
-package com.maximmakarov.comparator.data.item
+package com.maximmakarov.comparator.data.model
 
 import androidx.room.*
-import com.maximmakarov.comparator.data.attribute.Attribute
 
 
 @Entity(tableName = "attributes_details",

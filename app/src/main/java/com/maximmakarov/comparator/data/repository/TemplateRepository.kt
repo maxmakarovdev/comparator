@@ -1,8 +1,9 @@
-package com.maximmakarov.comparator.data.template
+package com.maximmakarov.comparator.data.repository
 
-import com.maximmakarov.comparator.data.AppDatabase
-import com.maximmakarov.comparator.data.attribute.Attribute
-import com.maximmakarov.comparator.data.attribute.AttributeGroup
+import com.maximmakarov.comparator.data.database.AppDatabase
+import com.maximmakarov.comparator.data.model.Attribute
+import com.maximmakarov.comparator.data.model.AttributeGroup
+import com.maximmakarov.comparator.data.model.Template
 
 
 class TemplateRepository(private val db: AppDatabase) {

@@ -1,7 +1,7 @@
 package com.maximmakarov.comparator.item.form
 
 import androidx.lifecycle.ViewModel
-import com.maximmakarov.comparator.data.item.ItemRepository
+import com.maximmakarov.comparator.data.repository.ItemRepository
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 
