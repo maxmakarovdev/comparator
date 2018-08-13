@@ -10,4 +10,7 @@ interface TemplateDao : BaseDao<Template> {
 
     @Query("SELECT * FROM templates")
     fun getTemplates(): LiveData<List<Template>>
+
+    @Query("SELECT * FROM templates where id = :id")
+    fun getTemplateById(id: Int): LiveData<Template>
 }

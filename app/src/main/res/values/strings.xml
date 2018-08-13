@@ -2,4 +2,8 @@
     <string name="app_name">Comparator</string>
 
     <string name="templates_title">TemplatesFragment</string>
+
+    <string name="template_name_hint">Template name</string>
+    <string name="template_data_hint">Attributes</string>
+    <string name="template_button">Submit</string>
 </resources>
