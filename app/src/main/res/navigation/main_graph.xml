@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/main_graph"
+            app:startDestination="@id/templatesFragment">
+
+    <fragment
+        android:id="@+id/templatesFragment"
+        android:name="com.maximmakarov.comparator.template.TemplatesFragment"
+        android:label="TemplatesFragment"
+        tools:layout="@layout/templates_fragment">
+        <action
+            android:id="@+id/action_select_template"
+            app:destination="@id/itemsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_add_or_view_template"
+            app:destination="@id/templateDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/itemsFragment"
+        android:name="com.maximmakarov.comparator.item.ItemsFragment"
+        android:label="ItemsFragment">
+        <argument
+            android:name="templateId"
+            android:defaultValue="0"
+            app:argType="integer"/>
+    </fragment>
+    <fragment
+        android:id="@+id/templateDetailFragment"
+        android:name="com.maximmakarov.comparator.template.add.TemplateDetailFragment"
+        android:label="TemplateDetailFragment">
+        <argument
+            android:name="templateId"
+            android:defaultValue="0"
+            app:argType="integer"/>
+    </fragment>
+</navigation>

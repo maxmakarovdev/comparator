@@ -16,14 +16,14 @@ abstract class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
         initViewModel()
+        initView()
         subscribeUi()
     }
 
-    open fun initView() {}
-
     open fun initViewModel() {}
+
+    open fun initView() {}
 
     open fun subscribeUi() {}
 }

@@ -3,6 +3,7 @@ package com.maximmakarov.comparator.template
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +22,18 @@ class TemplateAdapter : ListAdapter<Template, TemplateAdapter.ViewHolder>(Templa
         getItem(position).let {
             holder.itemView.apply {
                 name.text = it.name
-                edit.onClick { }
+
+                item.onClick {
+                    val action = TemplatesFragmentDirections.actionSelectTemplate()
+                    action.setTemplateId(it.id!!)
+                    findNavController().navigate(action)
+                }
+
+                edit.onClick {
+                    val action = TemplatesFragmentDirections.actionAddOrViewTemplate()
+                    action.setTemplateId(it.id!!)
+                    findNavController().navigate(action)
+                }
             }
         }
     }

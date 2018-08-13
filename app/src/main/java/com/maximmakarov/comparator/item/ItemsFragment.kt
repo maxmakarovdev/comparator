@@ -11,14 +11,14 @@ import kotlinx.android.synthetic.main.items_fragment.*
 
 class ItemsFragment : BaseFragment() {
 
-    companion object {
-        fun newInstance() = ItemsFragment()
-    }
-
     override val layoutId = R.layout.items_fragment
 
     private lateinit var viewModel: ItemsViewModel
     private lateinit var adapter: ItemAdapter
+
+    override fun initViewModel() {
+        viewModel = ViewModelProviders.of(this).get(ItemsViewModel::class.java)
+    }
 
     override fun initView() {
         adapter = ItemAdapter()
@@ -27,11 +27,8 @@ class ItemsFragment : BaseFragment() {
         items.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
     }
 
-    override fun initViewModel() {
-        viewModel = ViewModelProviders.of(this).get(ItemsViewModel::class.java)
-    }
-
     override fun subscribeUi() {
-        viewModel.getItems(1).observe(this, Observer { adapter.submitList(it) })
+        val templateId = ItemsFragmentArgs.fromBundle(arguments).templateId
+        viewModel.getItems(templateId).observe(this, Observer { adapter.submitList(it) })
     }
 }
