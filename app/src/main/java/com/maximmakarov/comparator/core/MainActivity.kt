@@ -1,4 +1,4 @@
-package com.maximmakarov.comparator.main
+package com.maximmakarov.comparator.core
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
