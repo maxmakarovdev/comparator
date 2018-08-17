@@ -52,7 +52,7 @@ dependencies {
     //DI
     implementation 'org.koin:koin-android-architecture:0.9.3'
 
-    //View
+    //UI
     implementation 'com.google.android.material:material:1.0.0-alpha1'
     implementation 'androidx.cardview:cardview:1.0.0-alpha1'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
