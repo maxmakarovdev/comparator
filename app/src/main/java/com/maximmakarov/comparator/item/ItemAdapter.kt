@@ -13,10 +13,9 @@ import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.ext.onClick
 import com.maximmakarov.comparator.data.model.Item
 import kotlinx.android.synthetic.main.item_item.view.*
-import org.koin.standalone.KoinComponent
 
 
-class ItemAdapter : ListAdapter<Item, ItemAdapter.ViewHolder>(ItemAdapter.DiffCallback()), KoinComponent {
+class ItemAdapter : ListAdapter<Item, ItemAdapter.ViewHolder>(ItemAdapter.DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_item, parent, false))
