@@ -12,17 +12,17 @@
         android:id="@+id/tabs"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:background="@color/color_primary"
+        android:background="@color/primary"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/color_accent"
+        app:tabIndicatorColor="@color/accent"
         app:tabIndicatorHeight="2dp"
         app:tabMaxWidth="0dp"
         app:tabMode="scrollable"
-        app:tabTextColor="@color/white"
+        app:tabTextColor="@color/grey_white_1000"
         tools:visibility="visible"/>
 
     <androidx.viewpager.widget.ViewPager
