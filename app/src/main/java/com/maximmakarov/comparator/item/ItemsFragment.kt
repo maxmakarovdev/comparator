@@ -2,11 +2,11 @@ package com.maximmakarov.comparator.item
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.R
+import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.core.ext.onClick
 import kotlinx.android.synthetic.main.items_fragment.*
 
@@ -31,7 +31,7 @@ class ItemsFragment : BaseFragment() {
         add.onClick {
             val action = ItemsFragmentDirections.actionAddOrViewItem()
             action.setTemplateId(ItemsFragmentArgs.fromBundle(arguments).templateId)
-            add?.findNavController()?.navigate(action)
+            findNavController(add).navigate(action)
         }
     }
 

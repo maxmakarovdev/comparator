@@ -2,9 +2,9 @@ package com.maximmakarov.comparator.template.detail
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
-import com.maximmakarov.comparator.core.BaseFragment
+import androidx.navigation.Navigation.findNavController
 import com.maximmakarov.comparator.R
+import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.core.ext.gone
 import com.maximmakarov.comparator.core.ext.onClick
 import kotlinx.android.synthetic.main.template_detail_fragment.*
@@ -31,7 +31,7 @@ class TemplateDetailFragment : BaseFragment() {
                     viewModel.addTemplate(name.text.toString(), attributes.text.toString())
                 }
             }
-            submit?.findNavController()?.popBackStack()
+            findNavController(submit).popBackStack()
         }
     }
 

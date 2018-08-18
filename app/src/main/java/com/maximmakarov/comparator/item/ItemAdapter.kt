@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -31,14 +31,14 @@ class ItemAdapter : ListAdapter<Item, ItemAdapter.ViewHolder>(ItemAdapter.DiffCa
                     val action = ItemsFragmentDirections.actionAddOrViewItem()
                     action.setTemplateId(it.templateId)
                     action.setItemId(it.id!!)
-                    findNavController().navigate(action)
+                    findNavController(item).navigate(action)
                 }
 
                 edit.onClick {
                     val action = ItemsFragmentDirections.actionAddOrViewItem()
                     action.setTemplateId(it.templateId)
                     action.setItemId(it.id!!)
-                    findNavController().navigate(action)
+                    findNavController(edit).navigate(action)
                 }
             }
         }

@@ -2,11 +2,11 @@ package com.maximmakarov.comparator.template
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.R
+import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.core.ext.onClick
 import kotlinx.android.synthetic.main.templates_fragment.*
 
@@ -29,7 +29,7 @@ class TemplatesFragment : BaseFragment() {
 
         add.onClick {
             val action = TemplatesFragmentDirections.actionAddOrViewTemplate()
-            add?.findNavController()?.navigate(action)
+            findNavController(add).navigate(action)
         }
     }
 
