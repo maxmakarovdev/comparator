@@ -6,7 +6,7 @@ import androidx.room.*
 @Entity(tableName = "attribute_groups",
         indices = [Index("template_id")],
         foreignKeys = [ForeignKey(entity = Template::class, parentColumns = ["id"], childColumns = ["template_id"], onDelete = ForeignKey.CASCADE)])
-class AttributeGroup(
+data class AttributeGroup(
         @PrimaryKey(autoGenerate = true)
         val id: Int? = null,
 

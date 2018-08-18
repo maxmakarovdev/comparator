@@ -1,6 +1,7 @@
 package com.maximmakarov.comparator.item.form
 
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -44,8 +45,8 @@ class PageFragment : BaseFragment() {
 
     override fun subscribeUi() {
         val templateId = arguments?.getInt(BUNDLE_TEMPLATE_ID)
-        val itemId = arguments?.getInt(BUNDLE_TEMPLATE_ID)
-        val groupId = arguments?.getInt(BUNDLE_TEMPLATE_ID)
+        val itemId = arguments?.getInt(BUNDLE_ITEM_ID)
+        val groupId = arguments?.getInt(BUNDLE_GROUP_ID)
         if (templateId != null && itemId != null && groupId != null) {
             viewModel.getItemData(templateId, itemId).observe(this, Observer { data ->
                 adapter.submitList(data.find { it.first.id == groupId }?.second)

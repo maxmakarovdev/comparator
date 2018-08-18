@@ -9,7 +9,7 @@ import androidx.room.*
             ForeignKey(entity = Item::class, parentColumns = ["id"], childColumns = ["item_id"], onDelete = ForeignKey.CASCADE),
             ForeignKey(entity = Attribute::class, parentColumns = ["id"], childColumns = ["attribute_id"], onDelete = ForeignKey.SET_NULL)
         ])
-class ItemAttrData(
+data class ItemAttrData(
         @PrimaryKey(autoGenerate = true)
         var id: Int? = null,
 
