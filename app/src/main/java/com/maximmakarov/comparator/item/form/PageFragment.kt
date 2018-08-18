@@ -2,9 +2,11 @@ package com.maximmakarov.comparator.item.form
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.R
@@ -41,6 +43,7 @@ class PageFragment : BaseFragment() {
         attributes.adapter = adapter
         attributes.itemAnimator = DefaultItemAnimator()
         attributes.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        attributes.addItemDecoration(DividerItemDecoration(activity!!, DividerItemDecoration.VERTICAL))
     }
 
     override fun subscribeUi() {
