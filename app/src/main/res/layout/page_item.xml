@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/attr_name"
+        android:textSize="@dimen/text_medium_16"
+        app:layout_constraintEnd_toStartOf="@+id/rating"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:inputType="textMultiLine"
+        android:text="@string/attr_comment"
+        android:textSize="@dimen/text_medial_14"
+        app:layout_constraintEnd_toStartOf="@+id/rating"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"/>
+
+    <com.shawnlin.numberpicker.NumberPicker
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:np_dividerColor="@color/primary"
+        app:np_dividerDistance="45dp"
+        app:np_dividerThickness="2dp"
+        app:np_fadingEdgeEnabled="true"
+        app:np_formatter="• %d •"
+        app:np_height="180dp"
+        app:np_max="5"
+        app:np_min="1"
+        app:np_order="descending"
+        app:np_orientation="vertical"
+        app:np_scrollerEnabled="true"
+        app:np_selectedTextColor="@color/primary"
+        app:np_selectedTextSize="@dimen/text_larger_28"
+        app:np_textColor="@color/grey_500"
+        app:np_textSize="@dimen/text_medium_16"
+        app:np_value="3"
+        app:np_wheelItemCount="5"
+        app:np_width="64dp"
+        app:np_wrapSelectorWheel="false"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

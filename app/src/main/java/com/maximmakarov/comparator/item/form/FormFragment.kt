@@ -40,16 +40,18 @@ class FormFragment : BaseFragment() {
         val itemId = FormFragmentArgs.fromBundle(arguments).itemId
         viewModel.getItemData(templateId, itemId).observe(this, Observer { data ->
             tabs.removeAllTabs()
-            val adapter = PagerAdapter(fragmentManager, data)
+            val adapter = PagerAdapter(fragmentManager, templateId, itemId, data)
             for (i in 0 until data.size) tabs.addTab(tabs.newTab().setText(adapter.getPageTitle(i)))
             viewPager.adapter = adapter
         })
     }
 
-    class PagerAdapter(fm: FragmentManager?, val data: List<Pair<AttributeGroup, List<ItemDataWithAttr>>>) : FragmentPagerAdapter(fm) {
+    class PagerAdapter(fm: FragmentManager?,
+                       val templateId: Int, val itemId: Int,
+                       val data: List<Pair<AttributeGroup, List<ItemDataWithAttr>>>) : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment =
-                PageFragment.newInstance(/*data[position].second*/)
+                PageFragment.newInstance(templateId, itemId, data[position].first.id!!)
 
         override fun getCount(): Int = data.size
 

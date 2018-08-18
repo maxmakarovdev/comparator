@@ -8,6 +8,7 @@
     <dimen name="text_big_20">20sp</dimen>
     <dimen name="text_bigger_22">22sp</dimen>
     <dimen name="text_large_24">24sp</dimen>
+    <dimen name="text_larger_28">28sp</dimen>
 
     <!-- Spacings, per the Android Design guidelines.-->
     <dimen name="padding_void">0dp</dimen>
