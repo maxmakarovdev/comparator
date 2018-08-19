@@ -2,6 +2,7 @@ package com.maximmakarov.comparator.item.form
 
 import androidx.lifecycle.*
 import com.maximmakarov.comparator.data.model.AttributeGroup
+import com.maximmakarov.comparator.data.model.Item
 import com.maximmakarov.comparator.data.repository.ItemDataWithAttr
 import com.maximmakarov.comparator.data.repository.ItemRepository
 import org.koin.standalone.KoinComponent
@@ -11,24 +12,25 @@ import org.koin.standalone.inject
 class FormViewModel : ViewModel(), KoinComponent {
 
     private val repository: ItemRepository by inject()
-    private val inputData: MutableLiveData<Args> = MutableLiveData()
-    private var args: Args? = null
+    private val inputData: MutableLiveData<Item> = MutableLiveData()
+    private var item: Item? = null
     private var data: List<Pair<AttributeGroup, List<ItemDataWithAttr>>>? = null
     val itemData: LiveData<List<Pair<AttributeGroup, List<ItemDataWithAttr>>>> =
             Transformations.map(Transformations.switchMap(inputData) {
-                repository.getItemData(it.templateId, it.itemId)
+                repository.getItemData(it.templateId, it.id)
             }) { data = it; it }
 
-    fun setArgs(templateId: Int, itemId: Int) {
-        if (args == null) { //set args only once
-            args = Args(templateId, itemId)
-            inputData.value = args
+    fun setArgs(templateId: Int, itemId: Int?) {
+        if (item == null) { //set args only once
+            item = Item(itemId, templateId)
+            inputData.value = item
         }
     }
 
-    fun saveChanges() {
-        data?.let { repository.saveItemData(it) }
+    fun saveChanges(itemName: String) {
+        if (data != null) {
+            item!!.name = itemName
+            repository.saveItemData(item!!, data!!)
+        }
     }
-
-    class Args(val templateId: Int, val itemId: Int)
 }

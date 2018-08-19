@@ -23,7 +23,7 @@ class FormFragment : BaseFragment() {
 
         val templateId = FormFragmentArgs.fromBundle(arguments).templateId
         val itemId = FormFragmentArgs.fromBundle(arguments).itemId
-        viewModel.setArgs(templateId, itemId)
+        viewModel.setArgs(templateId, if(itemId != 0) itemId else null)
     }
 
     override fun initView() {

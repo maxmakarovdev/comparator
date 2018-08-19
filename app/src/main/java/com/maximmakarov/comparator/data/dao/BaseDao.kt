@@ -10,8 +10,8 @@ interface BaseDao<T> {
     fun insert(vararg obj: T): List<Long>
 
     @Update
-    fun update(obj: T)
+    fun update(vararg obj: T)
 
     @Delete
-    fun delete(obj: T)
+    fun delete(vararg obj: T)
 }

@@ -13,7 +13,7 @@ class Item(
         @ColumnInfo(name = "template_id")
         val templateId: Int,
 
-        val name: String,
+        var name: String = "",
 
         val score: Double? = null
 )
