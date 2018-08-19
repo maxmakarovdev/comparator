@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation.findNavController
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.BaseFragment
-import com.maximmakarov.comparator.core.ext.gone
 import com.maximmakarov.comparator.core.ext.onClick
+import com.maximmakarov.comparator.core.ext.visibleOrGone
 import kotlinx.android.synthetic.main.template_detail_fragment.*
 import kotlinx.coroutines.experimental.launch
 
@@ -19,11 +19,16 @@ class TemplateDetailFragment : BaseFragment() {
 
     override fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(TemplateDetailViewModel::class.java)
+
+        val templateId = TemplateDetailFragmentArgs.fromBundle(arguments).templateId
+        if (templateId != 0) viewModel.setArgs(templateId)
     }
 
     override fun initView() {
+        val templateId = TemplateDetailFragmentArgs.fromBundle(arguments).templateId
+        attributes.visibleOrGone(templateId == 0)
+
         submit.onClick {
-            val templateId = TemplateDetailFragmentArgs.fromBundle(arguments).templateId
             launch {
                 if (templateId != 0) {
                     viewModel.editTemplateName(templateId, name.text.toString()) //todo check whether name was changed or not
@@ -36,12 +41,8 @@ class TemplateDetailFragment : BaseFragment() {
     }
 
     override fun subscribeUi() {
-        val templateId = TemplateDetailFragmentArgs.fromBundle(arguments).templateId
-        if (templateId != 0) {
-            attributes.gone()
-            viewModel.getTemplateById(templateId).observe(this, Observer {
-                name.setText(it.name)
-            })
-        }
+        viewModel.templateData.observe(this, Observer {
+            name.setText(it.name)
+        })
     }
 }

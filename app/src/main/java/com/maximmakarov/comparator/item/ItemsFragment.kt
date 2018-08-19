@@ -20,6 +20,9 @@ class ItemsFragment : BaseFragment() {
 
     override fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(ItemsViewModel::class.java)
+
+        val templateId = ItemsFragmentArgs.fromBundle(arguments).templateId
+        viewModel.setArgs(templateId)
     }
 
     override fun initView() {
@@ -36,7 +39,6 @@ class ItemsFragment : BaseFragment() {
     }
 
     override fun subscribeUi() {
-        val templateId = ItemsFragmentArgs.fromBundle(arguments).templateId
-        viewModel.getItems(templateId).observe(this, Observer { adapter.submitList(it) })
+        viewModel.itemsData.observe(this, Observer { adapter.submitList(it) })
     }
 }

@@ -6,8 +6,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.tabs.TabLayout
-import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.R
+import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.data.model.AttributeGroup
 import com.maximmakarov.comparator.data.repository.ItemDataWithAttr
 import kotlinx.android.synthetic.main.form_fragment.*
@@ -20,6 +20,10 @@ class FormFragment : BaseFragment() {
 
     override fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(FormViewModel::class.java)
+
+        val templateId = FormFragmentArgs.fromBundle(arguments).templateId
+        val itemId = FormFragmentArgs.fromBundle(arguments).itemId
+        viewModel.setArgs(templateId, itemId)
     }
 
     override fun initView() {
@@ -36,25 +40,19 @@ class FormFragment : BaseFragment() {
     }
 
     override fun subscribeUi() {
-        val templateId = FormFragmentArgs.fromBundle(arguments).templateId
-        val itemId = FormFragmentArgs.fromBundle(arguments).itemId
-        viewModel.getItemData(templateId, itemId).observe(this, Observer { data ->
+        viewModel.itemData.observe(this, Observer { data ->
             tabs.removeAllTabs()
-            val adapter = PagerAdapter(fragmentManager, templateId, itemId, data)
+            val adapter = PagerAdapter(childFragmentManager, data)
             for (i in 0 until data.size) tabs.addTab(tabs.newTab().setText(adapter.getPageTitle(i)))
+//            viewPager.offscreenPageLimit = data.size
             viewPager.adapter = adapter
         })
     }
 
-    class PagerAdapter(fm: FragmentManager?,
-                       val templateId: Int, val itemId: Int,
-                       val data: List<Pair<AttributeGroup, List<ItemDataWithAttr>>>) : FragmentPagerAdapter(fm) {
+    class PagerAdapter(fm: FragmentManager?, val data: List<Pair<AttributeGroup, List<ItemDataWithAttr>>>) : FragmentPagerAdapter(fm) {
 
-        override fun getItem(position: Int): Fragment =
-                PageFragment.newInstance(templateId, itemId, data[position].first.id!!)
-
+        override fun getItem(position: Int) = PageFragment.newInstance(data[position].first.id!!)
         override fun getCount(): Int = data.size
-
         override fun getPageTitle(position: Int): CharSequence = data[position].first.name
     }
 }

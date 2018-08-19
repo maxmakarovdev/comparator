@@ -34,6 +34,6 @@ class TemplatesFragment : BaseFragment() {
     }
 
     override fun subscribeUi() {
-        viewModel.getTemplates().observe(this, Observer { adapter.submitList(it) })
+        viewModel.templatesData.observe(this, Observer { adapter.submitList(it) })
     }
 }
