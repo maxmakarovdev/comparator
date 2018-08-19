@@ -45,6 +45,10 @@ class ItemRepository(private val db: AppDatabase) {
             }
         }
     }
+
+    fun saveItemData(data: List<Pair<AttributeGroup, List<ItemDataWithAttr>>>) {
+
+    }
 }
 
 data class ItemDataWithAttr(val attribute: Attribute, val data: ItemAttrData = ItemAttrData())

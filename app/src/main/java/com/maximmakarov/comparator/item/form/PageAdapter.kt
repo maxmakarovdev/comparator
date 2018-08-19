@@ -1,6 +1,8 @@
 package com.maximmakarov.comparator.item.form
 
 import android.graphics.Typeface
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,11 +20,21 @@ class PageAdapter : ListAdapter<ItemDataWithAttr, PageAdapter.ViewHolder>(PageAd
             ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.page_item, parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        getItem(position).let {
+        getItem(position).let { item ->
             holder.itemView.apply {
-                title.text = it.attribute.name
-                title.setTypeface(title.typeface, if (it.attribute.isImportant) Typeface.BOLD else Typeface.NORMAL)
-                comment.setText(it.data.answer)
+                title.text = item.attribute.name
+                title.setTypeface(title.typeface, if (item.attribute.isImportant) Typeface.BOLD else Typeface.NORMAL)
+                comment.setText(item.data.answer)
+                item.data.score?.let { rating.value = it }
+
+                rating.setOnValueChangedListener { _, _, newValue -> item.data.score = newValue }
+                comment.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {}
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        item.data.answer = s?.toString() ?: ""
+                    }
+                })
             }
         }
     }

@@ -13,16 +13,21 @@ class FormViewModel : ViewModel(), KoinComponent {
     private val repository: ItemRepository by inject()
     private val inputData: MutableLiveData<Args> = MutableLiveData()
     private var args: Args? = null
+    private var data: List<Pair<AttributeGroup, List<ItemDataWithAttr>>>? = null
     val itemData: LiveData<List<Pair<AttributeGroup, List<ItemDataWithAttr>>>> =
-            Transformations.switchMap(inputData) {
+            Transformations.map(Transformations.switchMap(inputData) {
                 repository.getItemData(it.templateId, it.itemId)
-            }
+            }) { data = it; it }
 
     fun setArgs(templateId: Int, itemId: Int) {
         if (args == null) { //set args only once
             args = Args(templateId, itemId)
             inputData.value = args
         }
+    }
+
+    fun saveChanges() {
+        data?.let { repository.saveItemData(it) }
     }
 
     class Args(val templateId: Int, val itemId: Int)
