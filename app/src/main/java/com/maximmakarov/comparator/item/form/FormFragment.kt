@@ -11,6 +11,8 @@ import androidx.navigation.Navigation
 import com.google.android.material.tabs.TabLayout
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.BaseFragment
+import com.maximmakarov.comparator.core.ext.inputDialog
+import com.maximmakarov.comparator.core.ext.showKeyboard
 import com.maximmakarov.comparator.data.model.AttributeGroup
 import com.maximmakarov.comparator.data.repository.ItemDataWithAttr
 import kotlinx.android.synthetic.main.form_fragment.*
@@ -31,7 +33,8 @@ class FormFragment : BaseFragment() {
     }
 
     override fun initView() {
-        setTitle(FormFragmentArgs.fromBundle(arguments).itemName)
+        val itemName = FormFragmentArgs.fromBundle(arguments).itemName
+        setTitle(if (itemName.isBlank()) getString(R.string.item_new) else itemName)
         setHasOptionsMenu(true)
 
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
@@ -46,11 +49,18 @@ class FormFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.action_apply -> {
-                val itemName = FormFragmentArgs.fromBundle(arguments).itemName
                 launch {
-                    viewModel.saveChanges(itemName) //todo get item name from toolbar
+                    viewModel.saveChanges(getTitle())
                 }
                 Navigation.findNavController(view!!).popBackStack()
+                return true
+            }
+            R.id.action_edit -> {
+                activity?.inputDialog(R.string.item_edit_name, getTitle(), R.string.item_new,
+                        R.string.apply, { d, name -> setTitle(name); d.dismiss() },
+                        R.string.cancel, { it.dismiss() }
+                )
+                activity?.showKeyboard()
                 return true
             }
             else -> super.onOptionsItemSelected(item)
