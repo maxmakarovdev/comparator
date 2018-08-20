@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation.findNavController
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.BaseFragment
+import com.maximmakarov.comparator.core.ext.inputDialog
+import com.maximmakarov.comparator.core.ext.showKeyboard
 import com.maximmakarov.comparator.core.ext.visibleOrGone
 import kotlinx.android.synthetic.main.template_detail_fragment.*
 import kotlinx.coroutines.experimental.launch
@@ -27,7 +29,8 @@ class TemplateDetailFragment : BaseFragment() {
     }
 
     override fun initView() {
-        setTitle(TemplateDetailFragmentArgs.fromBundle(arguments).templateName)
+        val templateName = TemplateDetailFragmentArgs.fromBundle(arguments).templateName
+        setTitle(if (templateName.isBlank()) getString(R.string.template_new) else templateName)
         setHasOptionsMenu(true)
 
         val templateId = TemplateDetailFragmentArgs.fromBundle(arguments).templateId
@@ -46,14 +49,22 @@ class TemplateDetailFragment : BaseFragment() {
                 val templateName = TemplateDetailFragmentArgs.fromBundle(arguments).templateName
                 launch {
                     if (templateId != 0) { //todo move this to VM
-                        if (name.text.toString() != templateName) { //name was changed
-                            viewModel.editTemplateName(templateId, name.text.toString())
+                        if (getTitle() != templateName) { //name was changed
+                            viewModel.editTemplateName(templateId, getTitle())
                         }
                     } else {
-                        viewModel.addTemplate(name.text.toString(), attributes.text.toString())
+                        viewModel.addTemplate(getTitle(), attributes.text.toString())
                     }
                 }
                 findNavController(view!!).popBackStack()
+                return true
+            }
+            R.id.action_edit -> {
+                activity?.inputDialog(R.string.template_edit_name, getTitle(), R.string.template_new,
+                        R.string.apply, { d, name -> setTitle(name); d.dismiss() },
+                        R.string.cancel, { it.dismiss() }
+                )
+                activity?.showKeyboard()
                 return true
             }
             else -> super.onOptionsItemSelected(item)
@@ -62,7 +73,7 @@ class TemplateDetailFragment : BaseFragment() {
 
     override fun subscribeUi() {
         viewModel.templateData.observe(this, Observer {
-            name.setText(it.name)
+            //not yet
         })
     }
 }

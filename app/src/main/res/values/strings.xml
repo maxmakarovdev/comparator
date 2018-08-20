@@ -3,8 +3,12 @@
 
     <string name="templates_title">Templates</string>
 
-    <string name="template_name_hint">Template name</string>
-    <string name="template_data_hint">Attributes</string>
+    <string name="template_new">New template</string>
+    <string name="template_edit_name">Edit template name</string>
+    <string name="template_data_title">Attributes</string>
+    <string name="template_data_hint">##Performance\nCPU\nRAM\nStorage\n##Screen\nResolution\nScreen size</string>
 
+    <string name="edit">Edit</string>
     <string name="apply">Apply</string>
+    <string name="cancel">Cancel</string>
 </resources>

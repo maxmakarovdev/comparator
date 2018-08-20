@@ -36,4 +36,8 @@ abstract class BaseFragment : Fragment() {
     fun setTitle(title: String) {
         (activity as AppCompatActivity?)?.supportActionBar?.title = title
     }
+
+    fun getTitle(): String {
+        return (activity as AppCompatActivity?)?.supportActionBar?.title?.toString() ?: ""
+    }
 }
