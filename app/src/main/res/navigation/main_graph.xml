@@ -33,6 +33,10 @@
             android:name="templateId"
             android:defaultValue="0"
             app:argType="integer"/>
+        <argument
+            android:name="templateName"
+            android:defaultValue=" "
+            app:argType="string"/>
         <action
             android:id="@+id/action_add_or_view_item"
             app:destination="@id/formFragment"
@@ -49,6 +53,10 @@
             android:name="templateId"
             android:defaultValue="0"
             app:argType="integer"/>
+        <argument
+            android:name="templateName"
+            android:defaultValue=" "
+            app:argType="string"/>
     </fragment>
     <fragment
         android:id="@+id/formFragment"
@@ -62,5 +70,9 @@
             android:name="itemId"
             android:defaultValue="0"
             app:argType="integer"/>
+        <argument
+            android:name="itemName"
+            android:defaultValue=" "
+            app:argType="string"/>
     </fragment>
 </navigation>

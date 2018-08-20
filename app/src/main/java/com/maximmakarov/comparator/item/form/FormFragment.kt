@@ -1,16 +1,20 @@
 package com.maximmakarov.comparator.item.form
 
-import androidx.fragment.app.Fragment
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.google.android.material.tabs.TabLayout
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.data.model.AttributeGroup
 import com.maximmakarov.comparator.data.repository.ItemDataWithAttr
 import kotlinx.android.synthetic.main.form_fragment.*
+import kotlinx.coroutines.experimental.launch
 
 class FormFragment : BaseFragment() {
 
@@ -23,12 +27,34 @@ class FormFragment : BaseFragment() {
 
         val templateId = FormFragmentArgs.fromBundle(arguments).templateId
         val itemId = FormFragmentArgs.fromBundle(arguments).itemId
-        viewModel.setArgs(templateId, if(itemId != 0) itemId else null)
+        viewModel.setArgs(templateId, if (itemId != 0) itemId else null)
     }
 
     override fun initView() {
+        setTitle(FormFragmentArgs.fromBundle(arguments).itemName)
+        setHasOptionsMenu(true)
+
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(tabSelectedListener)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu_apply, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.action_apply -> {
+                val itemName = FormFragmentArgs.fromBundle(arguments).itemName
+                launch {
+                    viewModel.saveChanges(itemName) //todo get item name from toolbar
+                }
+                Navigation.findNavController(view!!).popBackStack()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private val tabSelectedListener = object : TabLayout.OnTabSelectedListener {

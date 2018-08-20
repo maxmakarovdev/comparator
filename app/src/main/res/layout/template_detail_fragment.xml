@@ -40,7 +40,7 @@
                 tools:text="Smartphones"/>
 
             <TextView
-                android:id="@+id/attributeTitle"
+                android:id="@+id/attributesTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -61,21 +61,9 @@
                 android:textSize="@dimen/text_medial_14"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/attributeTitle"
+                app:layout_constraintTop_toBottomOf="@+id/attributesTitle"
                 tools:lines="7"
                 tools:text="##Performance\nCPU\nRAM\nStorage\n##Screen\nResolution\nScreen size"/>
-
-            <Button
-                android:id="@+id/submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/template_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/attributes"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

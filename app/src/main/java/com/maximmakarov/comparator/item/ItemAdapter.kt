@@ -31,6 +31,7 @@ class ItemAdapter : ListAdapter<Item, ItemAdapter.ViewHolder>(ItemAdapter.DiffCa
                     val action = ItemsFragmentDirections.actionAddOrViewItem()
                     action.setTemplateId(it.templateId)
                     action.setItemId(it.id!!)
+                    action.setItemName(it.name)
                     findNavController(item).navigate(action)
                 }
 
@@ -38,6 +39,7 @@ class ItemAdapter : ListAdapter<Item, ItemAdapter.ViewHolder>(ItemAdapter.DiffCa
                     val action = ItemsFragmentDirections.actionAddOrViewItem()
                     action.setTemplateId(it.templateId)
                     action.setItemId(it.id!!)
+                    action.setItemName(it.name)
                     findNavController(edit).navigate(action)
                 }
             }

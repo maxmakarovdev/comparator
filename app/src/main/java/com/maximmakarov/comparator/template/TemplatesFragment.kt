@@ -22,6 +22,8 @@ class TemplatesFragment : BaseFragment() {
     }
 
     override fun initView() {
+        setTitle(R.string.templates_title)
+
         adapter = TemplateAdapter()
         templates.adapter = adapter
         templates.itemAnimator = DefaultItemAnimator()

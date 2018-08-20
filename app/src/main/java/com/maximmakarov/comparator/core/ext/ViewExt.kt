@@ -34,8 +34,8 @@ fun View.visibleOrInvisible(isVisible: Boolean) {
     visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
 }
 
-fun Array<View>.visible() = forEach { it.visible() }
-fun Array<View>.invisible() = forEach { it.invisible() }
-fun Array<View>.gone() = forEach { it.gone() }
-fun Array<View>.visibleOrGone(isVisible: Boolean) = forEach { it.visibleOrGone(isVisible) }
-fun Array<View>.visibleOrInvisible(isVisible: Boolean) = forEach { it.visibleOrInvisible(isVisible) }
+fun Array<out View>.visible() = forEach { it.visible() }
+fun Array<out View>.invisible() = forEach { it.invisible() }
+fun Array<out View>.gone() = forEach { it.gone() }
+fun Array<out View>.visibleOrGone(isVisible: Boolean) = forEach { it.visibleOrGone(isVisible) }
+fun Array<out View>.visibleOrInvisible(isVisible: Boolean) = forEach { it.visibleOrInvisible(isVisible) }

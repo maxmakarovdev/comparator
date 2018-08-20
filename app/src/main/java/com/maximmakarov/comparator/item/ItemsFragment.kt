@@ -26,6 +26,8 @@ class ItemsFragment : BaseFragment() {
     }
 
     override fun initView() {
+        setTitle(ItemsFragmentArgs.fromBundle(arguments).templateName)
+
         adapter = ItemAdapter()
         items.adapter = adapter
         items.itemAnimator = DefaultItemAnimator()

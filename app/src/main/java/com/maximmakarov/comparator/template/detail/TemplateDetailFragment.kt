@@ -1,11 +1,13 @@
 package com.maximmakarov.comparator.template.detail
 
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation.findNavController
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.BaseFragment
-import com.maximmakarov.comparator.core.ext.onClick
 import com.maximmakarov.comparator.core.ext.visibleOrGone
 import kotlinx.android.synthetic.main.template_detail_fragment.*
 import kotlinx.coroutines.experimental.launch
@@ -25,18 +27,36 @@ class TemplateDetailFragment : BaseFragment() {
     }
 
     override fun initView() {
-        val templateId = TemplateDetailFragmentArgs.fromBundle(arguments).templateId
-        attributes.visibleOrGone(templateId == 0)
+        setTitle(TemplateDetailFragmentArgs.fromBundle(arguments).templateName)
+        setHasOptionsMenu(true)
 
-        submit.onClick {
-            launch {
-                if (templateId != 0) {
-                    viewModel.editTemplateName(templateId, name.text.toString()) //todo check whether name was changed or not
-                } else {
-                    viewModel.addTemplate(name.text.toString(), attributes.text.toString())
+        val templateId = TemplateDetailFragmentArgs.fromBundle(arguments).templateId
+        arrayOf(attributesTitle, attributes).visibleOrGone(templateId == 0)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu_apply, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.action_apply -> {
+                val templateId = TemplateDetailFragmentArgs.fromBundle(arguments).templateId
+                val templateName = TemplateDetailFragmentArgs.fromBundle(arguments).templateName
+                launch {
+                    if (templateId != 0) { //todo move this to VM
+                        if (name.text.toString() != templateName) { //name was changed
+                            viewModel.editTemplateName(templateId, name.text.toString())
+                        }
+                    } else {
+                        viewModel.addTemplate(name.text.toString(), attributes.text.toString())
+                    }
                 }
+                findNavController(view!!).popBackStack()
+                return true
             }
-            findNavController(submit).popBackStack()
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
