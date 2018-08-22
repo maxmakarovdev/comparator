@@ -4,12 +4,12 @@
     <string name="templates_title">Templates</string>
 
     <string name="template_new">New template</string>
-    <string name="template_edit_name">Edit template name</string>
+    <string name="template_edit_name">Set template name</string>
     <string name="template_data_title">Attributes</string>
     <string name="template_data_hint">##Performance\nCPU\nRAM\nStorage\n##Screen\nResolution\nScreen size</string>
 
     <string name="item_new">New item</string>
-    <string name="item_edit_name">Edit item name</string>
+    <string name="item_edit_name">Set item name</string>
 
     <string name="edit">Edit</string>
     <string name="apply">Apply</string>

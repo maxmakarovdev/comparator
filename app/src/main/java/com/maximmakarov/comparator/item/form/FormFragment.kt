@@ -34,11 +34,24 @@ class FormFragment : BaseFragment() {
 
     override fun initView() {
         val itemName = FormFragmentArgs.fromBundle(arguments).itemName
-        setTitle(if (itemName.isBlank()) getString(R.string.item_new) else itemName)
+        if (itemName.isBlank()) {
+            setTitle(R.string.item_new)
+            showSetNameDialog()
+        } else {
+            setTitle(itemName)
+        }
         setHasOptionsMenu(true)
 
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(tabSelectedListener)
+    }
+
+    private fun showSetNameDialog(){
+        activity?.inputDialog(R.string.item_edit_name, getTitle(), R.string.item_new,
+                R.string.apply, { d, name -> setTitle(name); d.dismiss() },
+                R.string.cancel, { it.dismiss() }
+        )
+        activity?.showKeyboard()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -56,11 +69,7 @@ class FormFragment : BaseFragment() {
                 return true
             }
             R.id.action_edit -> {
-                activity?.inputDialog(R.string.item_edit_name, getTitle(), R.string.item_new,
-                        R.string.apply, { d, name -> setTitle(name); d.dismiss() },
-                        R.string.cancel, { it.dismiss() }
-                )
-                activity?.showKeyboard()
+                showSetNameDialog()
                 return true
             }
             else -> super.onOptionsItemSelected(item)

@@ -30,11 +30,24 @@ class TemplateDetailFragment : BaseFragment() {
 
     override fun initView() {
         val templateName = TemplateDetailFragmentArgs.fromBundle(arguments).templateName
-        setTitle(if (templateName.isBlank()) getString(R.string.template_new) else templateName)
+        if (templateName.isBlank()){
+            setTitle(R.string.template_new)
+            showSetNameDialog()
+        } else {
+            setTitle(templateName)
+        }
         setHasOptionsMenu(true)
 
         val templateId = TemplateDetailFragmentArgs.fromBundle(arguments).templateId
         arrayOf(attributesTitle, attributes).visibleOrGone(templateId == 0)
+    }
+
+    private fun showSetNameDialog(){
+        activity?.inputDialog(R.string.template_edit_name, getTitle(), R.string.template_new,
+                R.string.apply, { d, name -> setTitle(name); d.dismiss() },
+                R.string.cancel, { it.dismiss() }
+        )
+        activity?.showKeyboard()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -60,11 +73,7 @@ class TemplateDetailFragment : BaseFragment() {
                 return true
             }
             R.id.action_edit -> {
-                activity?.inputDialog(R.string.template_edit_name, getTitle(), R.string.template_new,
-                        R.string.apply, { d, name -> setTitle(name); d.dismiss() },
-                        R.string.cancel, { it.dismiss() }
-                )
-                activity?.showKeyboard()
+                showSetNameDialog()
                 return true
             }
             else -> super.onOptionsItemSelected(item)
