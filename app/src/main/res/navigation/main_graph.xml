@@ -63,9 +63,12 @@
             android:name="item"
             app:argType="android.os.Parcelable"/>
     </fragment>
+    <fragment
+        android:id="@+id/comparisonFragment"
+        android:name="com.maximmakarov.comparator.item.comparison.ComparisonFragment"
+        android:label="ComparisonFragment">
         <argument
-            android:name="itemName"
-            android:defaultValue=" "
-            app:argType="string"/>
+            android:name="items"
+            app:argType="android.os.Parcelable"/>
     </fragment>
 </navigation>
