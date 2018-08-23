@@ -20,9 +20,9 @@ class FormViewModel : ViewModel(), KoinComponent {
                 repository.getItemData(it.templateId, it.id)
             }) { data = it; it }
 
-    fun setArgs(templateId: Int, itemId: Int?) {
-        if (item == null) { //set args only once
-            item = Item(itemId, templateId)
+    fun setArgs(itemArg: Item) {
+        if (item == null) {
+            item = itemArg
             inputData.value = item
         }
     }

@@ -13,23 +13,24 @@ import org.koin.standalone.inject
 class TemplateDetailViewModel : ViewModel(), KoinComponent {
 
     private val repository: TemplateRepository by inject()
-    private val inputData: MutableLiveData<Args> = MutableLiveData()
-    private var args: Args? = null
+    private val inputData: MutableLiveData<Template> = MutableLiveData()
+    private var template: Template? = null
     val templateData: LiveData<Template> =
             Transformations.switchMap(inputData) {
-                repository.getTemplateById(it.templateId)
+                repository.getTemplateById(it.id!!)
             }
 
-    fun setArgs(templateId: Int) {
-        if (args == null) { //set args only once
-            args = Args(templateId)
-            inputData.value = args
+    fun setArgs(templateArg: Template) {
+        if (template == null) {
+            template = templateArg
+            if (template?.id != null) {
+                inputData.value = template
+            }
         }
     }
 
-    class Args(val templateId: Int)
-
-    fun addTemplate(name: String, attributes: String) = repository.addTemplate(name, attributes)
-
-    fun editTemplateName(templateId: Int, name: String) = repository.updateTemplate(templateId, name)
+    fun saveChanged(name: String, attributes: String) {
+        if (template!!.id != null) repository.updateTemplate(template!!.id!!, name)
+        else repository.addTemplate(name, attributes)
+    }
 }

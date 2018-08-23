@@ -28,18 +28,12 @@ class ItemAdapter : ListAdapter<Item, ItemAdapter.ViewHolder>(ItemAdapter.DiffCa
                 score.setTextColor(ArgbEvaluator().evaluate(
                         (it.score?.toFloat() ?: 0f) / 10f, Color.RED, Color.GREEN) as Int)
                 item.onClick {
-                    val action = ItemsFragmentDirections.actionAddOrViewItem()
-                    action.setTemplateId(it.templateId)
-                    action.setItemId(it.id!!)
-                    action.setItemName(it.name)
+                    val action = ItemsFragmentDirections.actionAddOrViewItem(it)
                     findNavController(item).navigate(action)
                 }
 
                 edit.onClick {
-                    val action = ItemsFragmentDirections.actionAddOrViewItem()
-                    action.setTemplateId(it.templateId)
-                    action.setItemId(it.id!!)
-                    action.setItemName(it.name)
+                    val action = ItemsFragmentDirections.actionAddOrViewItem(it)
                     findNavController(edit).navigate(action)
                 }
             }

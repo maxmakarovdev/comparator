@@ -30,16 +30,18 @@
         android:name="com.maximmakarov.comparator.item.ItemsFragment"
         android:label="ItemsFragment">
         <argument
-            android:name="templateId"
-            android:defaultValue="0"
-            app:argType="integer"/>
-        <argument
-            android:name="templateName"
-            android:defaultValue=" "
-            app:argType="string"/>
+            android:name="template"
+            app:argType="android.os.Parcelable"/>
         <action
             android:id="@+id/action_add_or_view_item"
             app:destination="@id/formFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_compare_items"
+            app:destination="@id/comparisonFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -50,26 +52,17 @@
         android:name="com.maximmakarov.comparator.template.detail.TemplateDetailFragment"
         android:label="TemplateDetailFragment">
         <argument
-            android:name="templateId"
-            android:defaultValue="0"
-            app:argType="integer"/>
-        <argument
-            android:name="templateName"
-            android:defaultValue=" "
-            app:argType="string"/>
+            android:name="template"
+            app:argType="android.os.Parcelable"/>
     </fragment>
     <fragment
         android:id="@+id/formFragment"
         android:name="com.maximmakarov.comparator.item.form.FormFragment"
         android:label="FormFragment">
         <argument
-            android:name="templateId"
-            android:defaultValue="0"
-            app:argType="integer"/>
-        <argument
-            android:name="itemId"
-            android:defaultValue="0"
-            app:argType="integer"/>
+            android:name="item"
+            app:argType="android.os.Parcelable"/>
+    </fragment>
         <argument
             android:name="itemName"
             android:defaultValue=" "

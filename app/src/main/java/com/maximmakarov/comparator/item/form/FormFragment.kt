@@ -14,6 +14,7 @@ import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.core.ext.inputDialog
 import com.maximmakarov.comparator.core.ext.showKeyboard
 import com.maximmakarov.comparator.data.model.AttributeGroup
+import com.maximmakarov.comparator.data.model.Item
 import com.maximmakarov.comparator.data.repository.ItemDataWithAttr
 import kotlinx.android.synthetic.main.form_fragment.*
 import kotlinx.coroutines.experimental.launch
@@ -27,18 +28,16 @@ class FormFragment : BaseFragment() {
     override fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(FormViewModel::class.java)
 
-        val templateId = FormFragmentArgs.fromBundle(arguments).templateId
-        val itemId = FormFragmentArgs.fromBundle(arguments).itemId
-        viewModel.setArgs(templateId, if (itemId != 0) itemId else null)
+        viewModel.setArgs(FormFragmentArgs.fromBundle(arguments).item as Item)
     }
 
     override fun initView() {
-        val itemName = FormFragmentArgs.fromBundle(arguments).itemName
-        if (itemName.isBlank()) {
+        val item = FormFragmentArgs.fromBundle(arguments).item as Item
+        if (item.name.isBlank()) {
             setTitle(R.string.item_new)
             showSetNameDialog()
         } else {
-            setTitle(itemName)
+            setTitle(item.name)
         }
         setHasOptionsMenu(true)
 

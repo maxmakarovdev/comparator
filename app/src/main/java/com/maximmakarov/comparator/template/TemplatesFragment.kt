@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.core.ext.onClick
+import com.maximmakarov.comparator.data.model.Template
 import kotlinx.android.synthetic.main.templates_fragment.*
 
 class TemplatesFragment : BaseFragment() {
@@ -30,7 +31,7 @@ class TemplatesFragment : BaseFragment() {
         templates.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
         add.onClick {
-            val action = TemplatesFragmentDirections.actionAddOrViewTemplate()
+            val action = TemplatesFragmentDirections.actionAddOrViewTemplate(Template(null, ""))
             findNavController(add).navigate(action)
         }
     }

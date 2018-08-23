@@ -24,16 +24,12 @@ class TemplateAdapter : ListAdapter<Template, TemplateAdapter.ViewHolder>(Templa
                 name.text = it.name
 
                 item.onClick {
-                    val action = TemplatesFragmentDirections.actionSelectTemplate()
-                    action.setTemplateId(it.id!!)
-                    action.setTemplateName(it.name)
+                    val action = TemplatesFragmentDirections.actionSelectTemplate(it)
                     findNavController(item).navigate(action)
                 }
 
                 edit.onClick {
-                    val action = TemplatesFragmentDirections.actionAddOrViewTemplate()
-                    action.setTemplateId(it.id!!)
-                    action.setTemplateName(it.name)
+                    val action = TemplatesFragmentDirections.actionAddOrViewTemplate(it)
                     findNavController(edit).navigate(action)
                 }
             }

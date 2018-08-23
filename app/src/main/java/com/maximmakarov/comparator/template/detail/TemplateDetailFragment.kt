@@ -11,6 +11,7 @@ import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.core.ext.inputDialog
 import com.maximmakarov.comparator.core.ext.showKeyboard
 import com.maximmakarov.comparator.core.ext.visibleOrGone
+import com.maximmakarov.comparator.data.model.Template
 import kotlinx.android.synthetic.main.template_detail_fragment.*
 import kotlinx.coroutines.experimental.launch
 
@@ -24,25 +25,23 @@ class TemplateDetailFragment : BaseFragment() {
     override fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(TemplateDetailViewModel::class.java)
 
-        val templateId = TemplateDetailFragmentArgs.fromBundle(arguments).templateId
-        if (templateId != 0) viewModel.setArgs(templateId)
+        viewModel.setArgs(TemplateDetailFragmentArgs.fromBundle(arguments).template as Template)
     }
 
     override fun initView() {
-        val templateName = TemplateDetailFragmentArgs.fromBundle(arguments).templateName
-        if (templateName.isBlank()){
+        val template = TemplateDetailFragmentArgs.fromBundle(arguments).template as Template
+        if (template.name.isBlank()) {
             setTitle(R.string.template_new)
             showSetNameDialog()
         } else {
-            setTitle(templateName)
+            setTitle(template.name)
         }
         setHasOptionsMenu(true)
 
-        val templateId = TemplateDetailFragmentArgs.fromBundle(arguments).templateId
-        arrayOf(attributesTitle, attributes).visibleOrGone(templateId == 0)
+        arrayOf(attributesTitle, attributes).visibleOrGone(template.id == null)
     }
 
-    private fun showSetNameDialog(){
+    private fun showSetNameDialog() {
         activity?.inputDialog(R.string.template_edit_name, getTitle(), R.string.template_new,
                 R.string.apply, { d, name -> setTitle(name); d.dismiss() },
                 R.string.cancel, { it.dismiss() }
@@ -58,16 +57,8 @@ class TemplateDetailFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.action_apply -> {
-                val templateId = TemplateDetailFragmentArgs.fromBundle(arguments).templateId
-                val templateName = TemplateDetailFragmentArgs.fromBundle(arguments).templateName
                 launch {
-                    if (templateId != 0) { //todo move this to VM
-                        if (getTitle() != templateName) { //name was changed
-                            viewModel.editTemplateName(templateId, getTitle())
-                        }
-                    } else {
-                        viewModel.addTemplate(getTitle(), attributes.text.toString())
-                    }
+                    viewModel.saveChanged(getTitle(), attributes.text.toString())
                 }
                 findNavController(view!!).popBackStack()
                 return true

@@ -1,5 +1,7 @@
 package com.maximmakarov.comparator.data.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.*
 
 
@@ -16,4 +18,25 @@ class Item(
         var name: String = "",
 
         val score: Double? = null
-)
+
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readInt(),
+            parcel.readString() ?: "",
+            parcel.readValue(Double::class.java.classLoader) as? Double)
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(id)
+        parcel.writeInt(templateId)
+        parcel.writeString(name)
+        parcel.writeValue(score)
+    }
+
+    override fun describeContents() = 0
+
+    companion object CREATOR : Parcelable.Creator<Item> {
+        override fun createFromParcel(parcel: Parcel) = Item(parcel)
+        override fun newArray(size: Int): Array<Item?> = arrayOfNulls(size)
+    }
+}
