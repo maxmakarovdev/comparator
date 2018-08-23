@@ -2,6 +2,7 @@ package com.maximmakarov.comparator.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.Transformations
 import com.maximmakarov.comparator.data.dao.GroupWithAttributes
 import com.maximmakarov.comparator.data.database.AppDatabase
 import com.maximmakarov.comparator.data.model.Attribute
@@ -13,26 +14,34 @@ class ItemRepository(private val db: AppDatabase) {
 
     fun getItems(templateId: Int) = db.itemDao().getItems(templateId)
 
-    fun getItemData(templateId: Int, itemId: Int?): LiveData<List<Pair<AttributeGroup, List<ItemDataWithAttr>>>> {
-        return MediatorLiveData<List<Pair<AttributeGroup, List<ItemDataWithAttr>>>>().apply {
+    fun getItemData(templateId: Int, itemId: Int?): LiveData<List<Pair<AttributeGroup, List<ItemDataWithAttr>>>> =
+            if (itemId == null) Transformations.map(getItemsData(templateId)) { it[0].second }
+            else Transformations.map(getItemsData(templateId, itemId)) { it[0].second }
+
+    fun getItemsData(templateId: Int, vararg itemsIds: Int): LiveData<List<Pair<Int, List<Pair<AttributeGroup, List<ItemDataWithAttr>>>>>> { //todo simplify to map
+        return MediatorLiveData<List<Pair<Int, List<Pair<AttributeGroup, List<ItemDataWithAttr>>>>>>().apply {
             var groupsWithAttributes: List<GroupWithAttributes>? = null
             var itemAttrData: List<ItemAttrData>? = null
 
             fun update() {
-                if (groupsWithAttributes != null && itemId == null) { //new item
-                    this.value = groupsWithAttributes!!.map {
+                if (groupsWithAttributes != null && itemsIds.isEmpty()) { //new item
+                    this.value = listOf(Pair(0, groupsWithAttributes!!.map {
                         Pair(it.group!!, it.attributes.map {
                             ItemDataWithAttr(it, ItemAttrData(attributeId = it.id))
                         })
-                    }
+                    }))
                 }
                 if (groupsWithAttributes != null && itemAttrData != null) { //existed item
-                    this.value = groupsWithAttributes!!.map {
-                        Pair(it.group!!, it.attributes.map { attr ->
-                            ItemDataWithAttr(attr, itemAttrData!!.find { it.attributeId == attr.id }
-                                    ?: ItemAttrData(itemId = itemId, attributeId = attr.id))
-                        })
+                    val data: MutableList<Pair<Int, List<Pair<AttributeGroup, List<ItemDataWithAttr>>>>> = mutableListOf()
+                    itemsIds.forEach { itemId ->
+                        data.add(Pair(itemId, groupsWithAttributes!!.map {
+                            Pair(it.group!!, it.attributes.map { attr ->
+                                ItemDataWithAttr(attr, itemAttrData!!.find { it.itemId == itemId && it.attributeId == attr.id }
+                                        ?: ItemAttrData(itemId = itemId, attributeId = attr.id))
+                            })
+                        }))
                     }
+                    this.value = data
                 }
             }
 
@@ -40,8 +49,8 @@ class ItemRepository(private val db: AppDatabase) {
                 groupsWithAttributes = it
                 update()
             }
-            if (itemId != null) {
-                addSource(db.itemAttrDataDao().getItemAttributeDetails(itemId)) {
+            if (itemsIds.isNotEmpty()) {
+                addSource(db.itemAttrDataDao().getItemsDetails(itemsIds)) {
                     itemAttrData = it
                     update()
                 }
