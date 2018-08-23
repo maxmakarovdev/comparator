@@ -9,5 +9,5 @@ import com.maximmakarov.comparator.data.model.ItemAttrData
 interface ItemAttrDataDao : BaseDao<ItemAttrData> {
 
     @Query("SELECT * FROM attributes_details WHERE item_id IN (:itemsIds)")
-    fun getItemsDetails(vararg itemsIds: Int): LiveData<List<ItemAttrData>>
+    fun getItemsDetails(itemsIds: Array<Int>): LiveData<List<ItemAttrData>>
 }
