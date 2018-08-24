@@ -11,11 +11,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.ext.onClick
+import com.maximmakarov.comparator.core.ext.onLongCLick
 import com.maximmakarov.comparator.data.model.Item
 import kotlinx.android.synthetic.main.item_item.view.*
 
 
-class ItemAdapter : ListAdapter<Item, ItemAdapter.ViewHolder>(ItemAdapter.DiffCallback()) {
+class ItemAdapter(val selectedCallback: () -> Unit) : ListAdapter<Item, ItemAdapter.ViewHolder>(ItemAdapter.DiffCallback()) {
+
+    private val selectedItems = mutableListOf<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_item, parent, false))
@@ -23,13 +26,20 @@ class ItemAdapter : ListAdapter<Item, ItemAdapter.ViewHolder>(ItemAdapter.DiffCa
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position).let {
             holder.itemView.apply {
+                item.setBackgroundResource(if (selectedItems.contains(position)) R.drawable.card_bg_selected else R.drawable.card_bg)
+
                 name.text = it.name
                 score.text = it.score.toString()
                 score.setTextColor(ArgbEvaluator().evaluate(
                         (it.score?.toFloat() ?: 0f) / 10f, Color.RED, Color.GREEN) as Int)
+
                 item.onClick {
                     val action = ItemsFragmentDirections.actionAddOrViewItem(it)
                     findNavController(item).navigate(action)
+                }
+
+                item.onLongCLick {
+                    selectItem(position)
                 }
 
                 edit.onClick {
@@ -39,6 +49,19 @@ class ItemAdapter : ListAdapter<Item, ItemAdapter.ViewHolder>(ItemAdapter.DiffCa
             }
         }
     }
+
+    private fun selectItem(position: Int) {
+        if (selectedItems.contains(position)) {
+            selectedItems.remove(position)
+        } else {
+            selectedItems.add(position)
+        }
+        selectedCallback()
+        notifyItemChanged(position)
+    }
+
+    fun getSelectedItems() = mutableListOf<Item>().apply { addAll(selectedItems.map { getItem(it) }) }
+
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 

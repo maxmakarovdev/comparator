@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.BaseFragment
-import com.maximmakarov.comparator.data.model.Item
+import com.maximmakarov.comparator.data.model.Items
 import kotlinx.android.synthetic.main.comparison_fragment.*
 
 
@@ -20,7 +20,7 @@ class ComparisonFragment : BaseFragment() {
         viewModel = ViewModelProviders.of(this).get(ComparisonViewModel::class.java)
 
         val items = ComparisonFragmentArgs.fromBundle(arguments).items
-        viewModel.setArgs(items as List<Item>)
+        viewModel.setArgs((items as Items).items)
     }
 
     override fun initView() {

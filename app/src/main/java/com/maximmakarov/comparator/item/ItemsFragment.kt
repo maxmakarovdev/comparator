@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.core.ext.onClick
+import com.maximmakarov.comparator.core.ext.visibleOrGone
 import com.maximmakarov.comparator.data.model.Item
+import com.maximmakarov.comparator.data.model.Items
 import com.maximmakarov.comparator.data.model.Template
 import kotlinx.android.synthetic.main.items_fragment.*
 
@@ -30,7 +32,9 @@ class ItemsFragment : BaseFragment() {
         val template = ItemsFragmentArgs.fromBundle(arguments).template as Template
         setTitle(template.name)
 
-        adapter = ItemAdapter()
+        adapter = ItemAdapter {
+            compare.visibleOrGone(adapter.getSelectedItems().isNotEmpty())
+        }
         items.adapter = adapter
         items.itemAnimator = DefaultItemAnimator()
         items.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
@@ -38,6 +42,11 @@ class ItemsFragment : BaseFragment() {
         add.onClick {
             val action = ItemsFragmentDirections.actionAddOrViewItem(Item(null, template.id!!, "", null))
             findNavController(add).navigate(action)
+        }
+
+        compare.onClick {
+            val action = ItemsFragmentDirections.actionCompareItems(Items(adapter.getSelectedItems()))
+            findNavController(compare).navigate(action)
         }
     }
 
