@@ -30,42 +30,31 @@ class ComparisonViewModel : ViewModel(), KoinComponent {
     }
 
     private fun transformData(data: List<Pair<Int, List<Pair<AttributeGroup, List<ItemDataWithAttr>>>>>): List<Row> {
-        //todo optimize this algorithm
-        val tableData: MutableList<Row> = mutableListOf()
+        val tableData = mutableListOf<Row>()
+
         tableData.add(Row().apply {
             cells.add("")
             cells.addAll(items!!.map { it.name })
         })
 
-        //list of columns
-        val preparedData: MutableList<MutableList<String>> = mutableListOf()
-        val column1 = mutableListOf<String>()
-        data[0].second.forEach {
-            //for each group
-            column1.add(it.first.name)
-            column1.addAll(it.second.map { it.attribute.name })
-        }
-        preparedData.add(column1)
+        val firstItemGroups = data[0].second
+        var row: Row
+        var attrs: List<ItemDataWithAttr>
+        for (groupIndex in 0 until firstItemGroups.size) {
 
-        items!!.forEach { item ->
-            val column = mutableListOf<String>()
-            data.find { it.first == item.id }!!.second.forEach {
-                column.add("")
-                column.addAll(it.second.map { it.data.answer })
-            }
-            preparedData.add(column)
-        }
+            tableData.add(Row(mutableListOf(firstItemGroups[groupIndex].first.name)))
 
-        //transpose matrix
-        for (i in 0 until data[0].second.size)
-            data[0].second.forEach {
-                val row = Row()
-                for (j in 0 until preparedData.size) {
-                    row.cells.add(preparedData[j][i])
+            attrs = firstItemGroups[groupIndex].second
+            for (attrIndex in 0 until attrs.size) {
+                row = Row(mutableListOf(attrs[attrIndex].attribute.name))
+
+                for (i in 0 until data.size) {
+                    row.cells.add(data[i].second[groupIndex].second[attrIndex].data.answer)
                 }
+
                 tableData.add(row)
             }
-
+        }
         return tableData
     }
 
