@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.maximmakarov.comparator.R
+import com.maximmakarov.comparator.core.ext.getColorCompat
 import com.maximmakarov.comparator.core.ext.onClick
 import com.maximmakarov.comparator.core.ext.onLongCLick
 import com.maximmakarov.comparator.data.model.Item
@@ -26,7 +27,7 @@ class ItemAdapter(val selectedCallback: () -> Unit) : ListAdapter<Item, ItemAdap
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position).let {
             holder.itemView.apply {
-                item.setBackgroundResource(if (selectedItems.contains(position)) R.drawable.card_bg_selected else R.drawable.card_bg)
+                item.setBackgroundColor(item.context.getColorCompat(if (selectedItems.contains(position)) R.color.accent else R.color.grey_white_1000))
 
                 name.text = it.name
                 score.text = it.score.toString()

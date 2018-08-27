@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.BaseFragment
+import com.maximmakarov.comparator.core.ext.getDrawableCompat
 import kotlinx.android.synthetic.main.page_fragment.*
 
 
@@ -37,7 +38,9 @@ class PageFragment : BaseFragment() {
         attributes.adapter = adapter
         attributes.itemAnimator = DefaultItemAnimator()
         attributes.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        attributes.addItemDecoration(DividerItemDecoration(activity!!, DividerItemDecoration.VERTICAL))
+        attributes.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL).apply {
+            context?.getDrawableCompat(R.drawable.divider)?.let { setDrawable(it) }
+        })
     }
 
     override fun subscribeUi() {
