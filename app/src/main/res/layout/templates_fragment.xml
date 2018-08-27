@@ -6,8 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_100"
-    tools:context=".template.TemplatesFragment">
+    android:background="@color/grey_white_1000">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add"
