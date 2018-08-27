@@ -45,8 +45,8 @@ class FormFragment : BaseFragment() {
         tabs.addOnTabSelectedListener(tabSelectedListener)
     }
 
-    private fun showSetNameDialog(){
-        activity?.inputDialog(R.string.item_edit_name, getTitle(), R.string.item_new,
+    private fun showSetNameDialog() {
+        activity?.inputDialog(R.string.item_edit_name, getTitle(), R.string.item_edit_name_hint,
                 R.string.apply, { d, name -> setTitle(name); d.dismiss() },
                 R.string.cancel, { it.dismiss() }
         )

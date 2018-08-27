@@ -41,11 +41,6 @@ class ItemAdapter(val selectedCallback: () -> Unit) : ListAdapter<Item, ItemAdap
                 item.onLongCLick {
                     selectItem(position)
                 }
-
-                edit.onClick {
-                    val action = ItemsFragmentDirections.actionAddOrViewItem(it)
-                    findNavController(edit).navigate(action)
-                }
             }
         }
     }

@@ -38,11 +38,11 @@ class TemplateDetailFragment : BaseFragment() {
         }
         setHasOptionsMenu(true)
 
-        arrayOf(attributesTitle, attributes).visibleOrGone(template.id == null)
+        attributes.visibleOrGone(template.id == null)
     }
 
     private fun showSetNameDialog() {
-        activity?.inputDialog(R.string.template_edit_name, getTitle(), R.string.template_new,
+        activity?.inputDialog(R.string.template_edit_name, getTitle(), R.string.template_edit_name_hint,
                 R.string.apply, { d, name -> setTitle(name); d.dismiss() },
                 R.string.cancel, { it.dismiss() }
         )

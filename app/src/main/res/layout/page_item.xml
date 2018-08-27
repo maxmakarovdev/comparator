@@ -19,19 +19,25 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Lorem ipsum"/>
 
-    <EditText
-        android:id="@+id/comment"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/commentLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/comment_bg"
-        android:inputType="textMultiLine"
-        android:textSize="@dimen/text_medial_14"
         app:layout_constraintEnd_toStartOf="@+id/rating"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:text="dolor sit amet"/>
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:textSize="@dimen/text_medial_14"
+            tools:text="dolor sit amet"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.shawnlin.numberpicker.NumberPicker
         android:id="@+id/rating"
@@ -40,7 +46,7 @@
         android:layout_centerInParent="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:np_dividerColor="@color/primary"
+        app:np_dividerColor="@color/accent"
         app:np_dividerDistance="35dp"
         app:np_dividerThickness="2dp"
         app:np_fadingEdgeEnabled="true"
@@ -50,7 +56,7 @@
         app:np_order="descending"
         app:np_orientation="vertical"
         app:np_scrollerEnabled="true"
-        app:np_selectedTextColor="@color/primary"
+        app:np_selectedTextColor="@color/accent"
         app:np_selectedTextSize="@dimen/text_big_20"
         app:np_textColor="@color/grey_500"
         app:np_textSize="@dimen/text_medium_16"

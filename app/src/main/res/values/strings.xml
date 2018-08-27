@@ -5,11 +5,15 @@
 
     <string name="template_new">New template</string>
     <string name="template_edit_name">Set template name</string>
+    <string name="template_edit_name_hint">Template name</string>
     <string name="template_data_title">Attributes</string>
-    <string name="template_data_hint">##Performance\nCPU\nRAM\nStorage\n##Screen\nResolution\nScreen size</string>
+    <string name="template_data_hint">##First group\nFirst attribute\nSecond attribute\nThird attribute\n##Second group\nFirst attribute\nSecond attribute</string>
 
     <string name="item_new">New item</string>
     <string name="item_edit_name">Set item name</string>
+    <string name="item_edit_name_hint">Item name</string>
+
+    <string name="comment_hint">Comment</string>
 
     <string name="edit">Edit</string>
     <string name="apply">Apply</string>

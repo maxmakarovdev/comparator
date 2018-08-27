@@ -5,10 +5,17 @@
              android:background="@color/grey_white_1000"
              android:padding="@dimen/padding_medium">
 
-    <EditText
-        android:id="@+id/text"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"/>
+        android:layout_height="wrap_content">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textSize="@dimen/text_medial_14"/>
+    </com.google.android.material.textfield.TextInputLayout>
 </FrameLayout>

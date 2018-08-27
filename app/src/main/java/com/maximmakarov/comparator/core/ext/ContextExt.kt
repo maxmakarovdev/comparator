@@ -4,11 +4,13 @@ import android.content.Context
 import android.content.DialogInterface
 import android.util.DisplayMetrics
 import android.view.View
-import android.widget.EditText
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.maximmakarov.comparator.R
 
 
@@ -19,13 +21,15 @@ fun Context.getColorCompat(@ColorRes colorResId: Int) = ContextCompat.getColor(t
 fun Context.getDrawableCompat(@DrawableRes drawableResId: Int) = ContextCompat.getDrawable(this, drawableResId)
 
 
-fun Context.inputDialog(title: Int, text: String, hint: Int,
-                        posTitle: Int, posAction: (dialog: DialogInterface, text: String) -> Unit,
-                        negTitle: Int, negAction: (dialog: DialogInterface) -> Unit) {
+fun Context.inputDialog(@StringRes title: Int, text: String, @StringRes hint: Int,
+                        @StringRes posTitle: Int, posAction: (dialog: DialogInterface, text: String) -> Unit,
+                        @StringRes negTitle: Int, negAction: (dialog: DialogInterface) -> Unit) {
 
     val view = View.inflate(this, R.layout.dialog_edit_text, null)
-    val edit = view.findViewById<EditText>(R.id.text).apply {
-        setHint(hint)
+    view.findViewById<TextInputLayout>(R.id.textLayout).apply {
+        setHint(getString(hint))
+    }
+    val edit = view.findViewById<TextInputEditText>(R.id.text).apply {
         setText(text)
         setSelection(text.length)
     }
