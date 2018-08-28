@@ -33,8 +33,8 @@ class ComparisonViewModel : ViewModel(), KoinComponent {
         val tableData = mutableListOf<Row>()
 
         tableData.add(Row().apply {
-            cells.add("")
-            cells.addAll(items!!.map { it.name })
+            add()
+            items!!.forEach { add(text = it.name) }
         })
 
         val firstItemGroups = data[0].second
@@ -42,14 +42,15 @@ class ComparisonViewModel : ViewModel(), KoinComponent {
         var attrs: List<ItemDataWithAttr>
         for (groupIndex in 0 until firstItemGroups.size) {
 
-            tableData.add(Row(mutableListOf(firstItemGroups[groupIndex].first.name)))
+            tableData.add(Row().apply { add(text = firstItemGroups[groupIndex].first.name, isGroup = true) })
 
             attrs = firstItemGroups[groupIndex].second
             for (attrIndex in 0 until attrs.size) {
-                row = Row(mutableListOf(attrs[attrIndex].attribute.name))
+                row = Row().apply { add(text = attrs[attrIndex].attribute.name) }
 
                 for (i in 0 until data.size) {
-                    row.cells.add(data[i].second[groupIndex].second[attrIndex].data.answer)
+                    val d = data[i].second[groupIndex].second[attrIndex].data
+                    row.add(text = d.answer, score = d.score ?: 0)
                 }
 
                 tableData.add(row)
@@ -58,5 +59,11 @@ class ComparisonViewModel : ViewModel(), KoinComponent {
         return tableData
     }
 
-    class Row(val cells: MutableList<String> = mutableListOf())
+    class Row(val cells: MutableList<Cell> = mutableListOf()) {
+        fun add(text: String = "", isGroup: Boolean = false, score: Int = 0) {
+            cells.add(Cell(text, isGroup, score))
+        }
+    }
+
+    class Cell(val text: String, val isGroup: Boolean, val score: Int)
 }

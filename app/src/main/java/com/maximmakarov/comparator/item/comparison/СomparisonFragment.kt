@@ -1,5 +1,6 @@
 package com.maximmakarov.comparator.item.comparison
 
+import android.view.LayoutInflater
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.lifecycle.Observer
@@ -35,15 +36,26 @@ class ComparisonFragment : BaseFragment() {
     }
 
     private fun fillTable(data: List<ComparisonViewModel.Row>) {
-        val rowParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
-        val padding = resources.getDimensionPixelSize(R.dimen.padding_small)
-        data.forEach {
-            val row = TableRow(activity)
-            it.cells.forEach {
-                val view = TextView(activity).apply { text = it }
-                view.layoutParams = rowParams
-                view.setPadding(padding, padding, padding, padding)
-                view.setBackgroundColor(view.context.getColorCompat(R.color.grey_white_1000))
+        data.forEachIndexed { i, rowData ->
+            val row = TableRow(context)
+            rowData.cells.forEachIndexed { j, cellData ->
+                val view = LayoutInflater.from(context).inflate(if (cellData.isGroup) R.layout.table_row_group else R.layout.table_cell, row, false)
+                val textView = view.findViewById<TextView>(R.id.text)
+                textView.text = cellData.text
+
+                if (cellData.isGroup) {
+                    view.layoutParams = (view.layoutParams as TableRow.LayoutParams).apply { span = data[0].cells.size }
+                }
+
+                view.setBackgroundColor(view.context.getColorCompat(
+                        when (cellData.score) {
+                            1 -> R.color.red_100
+                            2 -> R.color.deep_orange_50
+                            4 -> R.color.light_green_50
+                            5 -> R.color.green_100
+                            else -> if (i == 0) R.color.grey_200 else R.color.grey_white_1000
+                        }))
+
                 row.addView(view)
             }
             table.addView(row)
