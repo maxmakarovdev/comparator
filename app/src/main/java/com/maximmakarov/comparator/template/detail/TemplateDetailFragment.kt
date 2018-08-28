@@ -43,8 +43,8 @@ class TemplateDetailFragment : BaseFragment() {
 
     private fun showSetNameDialog() {
         activity?.inputDialog(R.string.template_edit_name, getTitle(), R.string.template_edit_name_hint,
-                R.string.apply, { d, name -> setTitle(name); d.dismiss() },
-                R.string.cancel, { it.dismiss() }
+                R.string.apply, { _, name -> setTitle(name) },
+                R.string.cancel, {}
         )
         activity?.showKeyboard()
     }
@@ -58,7 +58,7 @@ class TemplateDetailFragment : BaseFragment() {
         return when (item?.itemId) {
             R.id.action_apply -> {
                 launch {
-                    viewModel.saveChanged(getTitle(), attributes.text.toString())
+                    viewModel.saveChanges(getTitle(), attributes.text.toString())
                 }
                 findNavController(view!!).popBackStack()
                 return true

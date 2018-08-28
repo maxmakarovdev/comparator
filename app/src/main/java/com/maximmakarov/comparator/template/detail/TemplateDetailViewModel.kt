@@ -29,7 +29,7 @@ class TemplateDetailViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    fun saveChanged(name: String, attributes: String) {
+    fun saveChanges(name: String, attributes: String) {
         if (template!!.id != null) repository.updateTemplate(template!!.id!!, name)
         else repository.addTemplate(name, attributes)
     }

@@ -47,8 +47,8 @@ class FormFragment : BaseFragment() {
 
     private fun showSetNameDialog() {
         activity?.inputDialog(R.string.item_edit_name, getTitle(), R.string.item_edit_name_hint,
-                R.string.apply, { d, name -> setTitle(name); d.dismiss() },
-                R.string.cancel, { it.dismiss() }
+                R.string.apply, { _, name -> setTitle(name) },
+                R.string.cancel, {}
         )
         activity?.showKeyboard()
     }

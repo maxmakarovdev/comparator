@@ -27,11 +27,6 @@ class TemplateAdapter : ListAdapter<Template, TemplateAdapter.ViewHolder>(Templa
                     val action = TemplatesFragmentDirections.actionSelectTemplate(it)
                     findNavController(item).navigate(action)
                 }
-
-                edit.onClick {
-                    val action = TemplatesFragmentDirections.actionAddOrViewTemplate(it)
-                    findNavController(edit).navigate(action)
-                }
             }
         }
     }

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.maximmakarov.comparator.data.model.Item
 import com.maximmakarov.comparator.data.model.Template
 import com.maximmakarov.comparator.data.repository.ItemRepository
+import com.maximmakarov.comparator.data.repository.TemplateRepository
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 
@@ -14,6 +15,7 @@ import org.koin.standalone.inject
 class ItemsViewModel : ViewModel(), KoinComponent {
 
     private val repository: ItemRepository by inject()
+    private val templateRepository: TemplateRepository by inject()
     private val inputData: MutableLiveData<Template> = MutableLiveData()
     private var template: Template? = null
     val itemsData: LiveData<List<Item>> =
@@ -26,5 +28,9 @@ class ItemsViewModel : ViewModel(), KoinComponent {
             template = templateArg
             inputData.value = template
         }
+    }
+
+    fun saveChanges(name: String) {
+        templateRepository.updateTemplate(template!!.id!!, name)
     }
 }
