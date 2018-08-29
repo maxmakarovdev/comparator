@@ -10,7 +10,6 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
-        style="@style/Widget.MaterialComponents.TabLayout"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:background="@color/primary"
@@ -23,6 +22,7 @@
         app:tabIndicatorHeight="2dp"
         app:tabMaxWidth="0dp"
         app:tabMode="scrollable"
+        app:tabTextAppearance="@style/AppTheme.TabTextAppearance"
         app:tabTextColor="@color/text_primary"
         tools:visibility="visible"/>
 

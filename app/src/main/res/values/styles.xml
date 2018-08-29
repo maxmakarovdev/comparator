@@ -6,10 +6,13 @@
         <item name="colorAccent">@color/accent</item>
 
         <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:colorControlHighlight">@color/accent</item>
         <item name="android:textColor">@color/text_primary</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
+
+    <style name="AppTheme.TabTextAppearance" parent="TextAppearance.MaterialComponents.Tab"/>
 </resources>

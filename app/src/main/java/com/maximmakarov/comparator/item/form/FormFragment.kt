@@ -88,7 +88,6 @@ class FormFragment : BaseFragment() {
             tabs.removeAllTabs()
             val adapter = PagerAdapter(childFragmentManager, data)
             for (i in 0 until data.size) tabs.addTab(tabs.newTab().setText(adapter.getPageTitle(i)))
-//            viewPager.offscreenPageLimit = data.size
             viewPager.adapter = adapter
         })
     }
