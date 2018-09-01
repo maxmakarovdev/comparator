@@ -9,6 +9,9 @@ import com.maximmakarov.comparator.data.model.AttributeGroup
 @Dao
 interface AttributeGroupDao : BaseDao<AttributeGroup> {
 
+    @Query("SELECT * FROM attribute_groups")
+    fun getGroups(): LiveData<List<AttributeGroup>>
+
     @Transaction
     @Query("SELECT * FROM attribute_groups WHERE template_id = :templateId")
     fun getGroupsWithAttributes(templateId: Int): LiveData<List<GroupWithAttributes>>
