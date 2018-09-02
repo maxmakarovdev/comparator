@@ -11,7 +11,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
-        versionName "0.9.0"
+        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -19,9 +19,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-    dataBinding {
-        enabled = true
     }
 }
 kotlin {
@@ -44,7 +41,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    implementation 'android.arch.work:work-runtime-ktx:1.0.0-alpha06'
+    implementation 'android.arch.work:work-runtime-ktx:1.0.0-alpha07'
 
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.24.0'
