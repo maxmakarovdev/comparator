@@ -20,8 +20,6 @@ import org.junit.runner.RunWith
 open class TemplateDaoTest {
     private lateinit var database: AppDatabase
 
-    private val testTemplates = arrayOf(Template(name = "first template"), Template(name = "second template"))
-
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
@@ -46,9 +44,10 @@ open class TemplateDaoTest {
 
     @Test
     fun testTemplatesInsertingAssignedIds() {
+        database.templateDao().insert(Template(name = "test"))
         val templates = getValue(database.templateDao().getTemplates())
 
-        assertTrue(templates[0].id != null)
+        assertTrue(templates.all { it.id != null })
     }
 
     @Test
@@ -61,9 +60,9 @@ open class TemplateDaoTest {
 
     @Test
     fun testTemplatesInsertingRetrievingData() {
-        val templateNames = getValue(database.templateDao().getTemplates()).map { it.name }
+        val templates = getValue(database.templateDao().getTemplates())
 
-        assertTrue(templateNames contentDeepEquals testTemplates.map { it.name })
+        assertTrue(templates.map { it.name } contentDeepEquals testTemplates.map { it.name })
     }
 
     @Test
@@ -87,13 +86,12 @@ open class TemplateDaoTest {
 
     @Test
     fun testTemplateCascadeDeleting() {
-        val template = getValue(database.templateDao().getTemplates())[0]
-        val groupId = database.attributeGroupDao().insert(AttributeGroup(templateId = template.id!!, name = "group"))[0].toInt()
-        val attributeId = database.attributeDao().insert(Attribute(groupId = groupId, name = "attribute"))[0].toInt()
-        val itemId = database.itemDao().insert(Item(templateId = template.id!!, name = "item"))[0].toInt()
-        database.itemAttrDataDao().insert(ItemAttrData(itemId = itemId, attributeId = attributeId, answer = "answer"))
+        database.itemDao().insert(*testItems)
+        database.attributeGroupDao().insert(*testGroups)
+        database.attributeDao().insert(*testAttributes)
+        database.itemAttrDataDao().insert(*testItemsData)
 
-        database.templateDao().delete(template)
+        database.templateDao().delete(*testTemplates)
 
         assertTrue(getValue(database.attributeGroupDao().getGroups()).isEmpty())
         assertTrue(getValue(database.attributeDao().getAttributes()).isEmpty())

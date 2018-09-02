@@ -20,21 +20,6 @@ import org.junit.runner.RunWith
 open class ItemAttrDataDaoTest {
     private lateinit var database: AppDatabase
 
-    private val testTemplate = Template(id = 1, name = "first template")
-    private val testItems = arrayOf(
-            Item(id = 1, templateId = 1, name = "first"),
-            Item(id = 2, templateId = 1, name = "second"),
-            Item(id = 3, templateId = 1, name = "third"))
-    private val testGroup = AttributeGroup(id = 1, templateId = 1, name = "group")
-    private val testAttributes = arrayOf(Attribute(id = 1, groupId = 1, name = "first"), Attribute(id = 2, groupId = 1, name = "second"))
-    private val testItemsData = arrayOf(
-            ItemAttrData(itemId = 1, attributeId = 1, answer = "one"),
-            ItemAttrData(itemId = 1, attributeId = 2, answer = "two"),
-            ItemAttrData(itemId = 2, attributeId = 1, answer = "three"),
-            ItemAttrData(itemId = 2, attributeId = 2, answer = "four"),
-            ItemAttrData(itemId = 3, attributeId = 1, answer = "five"),
-            ItemAttrData(itemId = 3, attributeId = 2, answer = "six"))
-
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
@@ -42,9 +27,9 @@ open class ItemAttrDataDaoTest {
     fun initDb() {
         database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(), AppDatabase::class.java).build()
 
-        database.templateDao().insert(testTemplate)
+        database.templateDao().insert(*testTemplates)
         database.itemDao().insert(*testItems)
-        database.attributeGroupDao().insert(testGroup)
+        database.attributeGroupDao().insert(*testGroups)
         database.attributeDao().insert(*testAttributes)
         database.itemAttrDataDao().insert(*testItemsData)
     }
@@ -63,16 +48,17 @@ open class ItemAttrDataDaoTest {
 
     @Test
     fun testItemsDataInsertingAssignedIds() {
+        database.itemAttrDataDao().insert(ItemAttrData(itemId = testItems[0].id!!, attributeId = testAttributes[0].id!!, answer = "test"))
         val itemsData = getValue(database.itemAttrDataDao().getItemAttrData())
 
-        assertTrue(itemsData[0].id != null)
+        assertTrue(itemsData.all { it.id != null })
     }
 
     @Test
     fun testItemsDataInsertingRetrieving() {
-        val itemsDataAnswers = getValue(database.itemAttrDataDao().getItemAttrData()).map { it.answer }
+        val itemsData = getValue(database.itemAttrDataDao().getItemAttrData())
 
-        assertTrue(itemsDataAnswers contentDeepEquals testItemsData.map { it.answer })
+        assertTrue(itemsData.map { it.answer } contentDeepEquals testItemsData.map { it.answer })
     }
 
     @Test

@@ -7,8 +7,6 @@ import androidx.test.runner.AndroidJUnit4
 import com.maximmakarov.comparator.core.ext.contentDeepEquals
 import com.maximmakarov.comparator.data.database.AppDatabase
 import com.maximmakarov.comparator.data.model.Attribute
-import com.maximmakarov.comparator.data.model.AttributeGroup
-import com.maximmakarov.comparator.data.model.Template
 import com.maximmakarov.comparator.util.getValue
 import org.junit.After
 import org.junit.Assert.assertTrue
@@ -22,10 +20,6 @@ import org.junit.runner.RunWith
 open class AttributeDaoTest {
     private lateinit var database: AppDatabase
 
-    private val testAttributes = arrayOf(Attribute(groupId = 1, name = "first"), Attribute(groupId = 1, name = "second"))
-    private val testGroup = AttributeGroup(id = 1, templateId = 1, name = "group")
-    private val testTemplate = Template(id = 1, name = "template")
-
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
@@ -33,8 +27,8 @@ open class AttributeDaoTest {
     fun initDb() {
         database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(), AppDatabase::class.java).build()
 
-        database.templateDao().insert(testTemplate)
-        database.attributeGroupDao().insert(testGroup)
+        database.templateDao().insert(*testTemplates)
+        database.attributeGroupDao().insert(*testGroups)
         database.attributeDao().insert(*testAttributes)
     }
 
@@ -52,6 +46,7 @@ open class AttributeDaoTest {
 
     @Test
     fun testAttributesInsertingAssignedIds() {
+        database.attributeDao().insert(Attribute(groupId = testGroups[0].id!!, name = "test"))
         val attributes = getValue(database.attributeDao().getAttributes())
 
         assertTrue(attributes.all { it.id != null })
@@ -59,9 +54,9 @@ open class AttributeDaoTest {
 
     @Test
     fun testAttributesInsertingRetrievingData() {
-        val attributeNames = getValue(database.attributeDao().getAttributes()).map { it.name }
+        val attributes = getValue(database.attributeDao().getAttributes())
 
-        assertTrue(attributeNames contentDeepEquals testAttributes.map { it.name })
+        assertTrue(attributes.map { it.name } contentDeepEquals testAttributes.map { it.name })
     }
 
     @Test

@@ -6,9 +6,7 @@ import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import com.maximmakarov.comparator.core.ext.contentDeepEquals
 import com.maximmakarov.comparator.data.database.AppDatabase
-import com.maximmakarov.comparator.data.model.Attribute
 import com.maximmakarov.comparator.data.model.AttributeGroup
-import com.maximmakarov.comparator.data.model.Template
 import com.maximmakarov.comparator.util.getValue
 import org.junit.After
 import org.junit.Assert.assertTrue
@@ -22,10 +20,6 @@ import org.junit.runner.RunWith
 open class AttributeGroupDaoTest {
     private lateinit var database: AppDatabase
 
-    private val testTemplate = Template(id = 1, name = "first template")
-    private val testGroup = arrayOf(AttributeGroup(id = 1, templateId = 1, name = "group"))
-    private val testAttributes = arrayOf(Attribute(id = 1, groupId = 1, name = "first"), Attribute(id = 2, groupId = 1, name = "second"))
-
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
@@ -33,8 +27,8 @@ open class AttributeGroupDaoTest {
     fun initDb() {
         database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(), AppDatabase::class.java).build()
 
-        database.templateDao().insert(testTemplate)
-        database.attributeGroupDao().insert(*testGroup)
+        database.templateDao().insert(*testTemplates)
+        database.attributeGroupDao().insert(*testGroups)
         database.attributeDao().insert(*testAttributes)
     }
 
@@ -52,6 +46,7 @@ open class AttributeGroupDaoTest {
 
     @Test
     fun testGroupInsertingAssignedIds() {
+        database.attributeGroupDao().insert(AttributeGroup(templateId = testTemplates[0].id!!, name = "test"))
         val groups = getValue(database.attributeGroupDao().getGroups())
 
         assertTrue(groups.all { it.id != null })
@@ -59,16 +54,16 @@ open class AttributeGroupDaoTest {
 
     @Test
     fun testGroupInsertingRetrieving() {
-        val groupNames = getValue(database.attributeGroupDao().getGroups()).map { it.name }
+        val groups = getValue(database.attributeGroupDao().getGroups())
 
-        assertTrue(groupNames contentDeepEquals testGroup.map { it.name })
+        assertTrue(groups.map { it.name } contentDeepEquals testGroups.map { it.name })
     }
 
     @Test
     fun testGetGroupWithAttributes() {
-        val groupWithAttributes = getValue(database.attributeGroupDao().getGroupsWithAttributes(testTemplate.id!!))[0]
+        val groupWithAttributes = getValue(database.attributeGroupDao().getGroupsWithAttributes(testTemplates[0].id!!))[0]
 
-        assertTrue(groupWithAttributes.group == testGroup[0])
+        assertTrue(groupWithAttributes.group == testGroups[0])
         assertTrue(groupWithAttributes.attributes contentDeepEquals testAttributes)
     }
 
@@ -88,6 +83,6 @@ open class AttributeGroupDaoTest {
         database.attributeGroupDao().delete(groups[0])
         groups = getValue(database.attributeGroupDao().getGroups())
 
-        assertTrue(groups.isEmpty())
+        assertTrue(groups.size == testGroups.size - 1)
     }
 }
