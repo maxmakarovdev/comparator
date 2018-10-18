@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.work.OneTimeWorkRequest
+import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.maximmakarov.comparator.data.dao.*
 import com.maximmakarov.comparator.data.model.*
@@ -26,7 +26,7 @@ abstract class AppDatabase : RoomDatabase() {
                     .addCallback(object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
-                            val request = OneTimeWorkRequest.Builder(PrePopulateDatabaseWorker::class.java).build()
+                            val request = OneTimeWorkRequestBuilder<PrePopulateDatabaseWorker>().build()
                             WorkManager.getInstance().enqueue(request)
                         }
                     }).build()

@@ -1,16 +1,18 @@
 package com.maximmakarov.comparator.data.database
 
+import android.content.Context
 import android.util.Log
 import androidx.work.Worker
+import androidx.work.WorkerParameters
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 
 
-class PrePopulateDatabaseWorker : Worker(), KoinComponent {
+class PrePopulateDatabaseWorker(context: Context, params: WorkerParameters) : Worker(context, params), KoinComponent {
 
     val db: AppDatabase by inject()
 
-    override fun doWork(): Worker.Result {
+    override fun doWork(): Result {
         return try {
             db.templateDao().insert(PREPOPULATE_TEMPLATE)
             db.attributeGroupDao().insert(*PREPOPULATE_GROUPS)
@@ -18,10 +20,10 @@ class PrePopulateDatabaseWorker : Worker(), KoinComponent {
             db.itemDao().insert(*PREPOPULATE_ITEMS)
             db.itemAttrDataDao().insert(*PREPOPULATE_ITEMS_DATA)
 
-            Worker.Result.SUCCESS
+            Result.SUCCESS
         } catch (ex: Exception) {
             Log.e(PrePopulateDatabaseWorker::class.java.simpleName, "Error seeding database", ex)
-            Worker.Result.FAILURE
+            Result.FAILURE
         }
     }
 }
