@@ -12,6 +12,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        startKoin(listOf(appModule, dataModule, domainModule))
+        startKoin(this, listOf(appModule, dataModule, domainModule))
     }
 }

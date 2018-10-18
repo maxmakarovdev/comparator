@@ -9,21 +9,21 @@ import com.maximmakarov.comparator.domain.interactor.IItemInteractor
 import com.maximmakarov.comparator.domain.interactor.ITemplateInteractor
 import com.maximmakarov.comparator.domain.interactor.ItemInteractor
 import com.maximmakarov.comparator.domain.interactor.TemplateInteractor
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
 
-val appModule = applicationContext {
-    bean { this }
-    bean { AppDatabase.buildDatabase(get()) }
+val appModule = module {
+    single { this }
+    single { AppDatabase.buildDatabase(get()) }
 }
 
-val dataModule = applicationContext {
-    bean { TemplateRepository(get()) as ITemplateRepository }
-    bean { ItemRepository(get()) as IItemRepository }
+val dataModule = module {
+    single { TemplateRepository(get()) as ITemplateRepository }
+    single { ItemRepository(get()) as IItemRepository }
 }
 
-val domainModule = applicationContext {
-    bean { ItemInteractor(get()) as IItemInteractor }
-    bean { TemplateInteractor(get()) as ITemplateInteractor }
+val domainModule = module {
+    single { ItemInteractor(get()) as IItemInteractor }
+    single { TemplateInteractor(get()) as ITemplateInteractor }
 }
 

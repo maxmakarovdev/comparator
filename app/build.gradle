@@ -47,7 +47,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.24.0'
 
     //DI
-    implementation 'org.koin:koin-android-architecture:0.9.3'
+    implementation 'org.koin:koin-android:1.0.1'
 
     //UI
     implementation 'com.google.android.material:material:1.0.0'
