@@ -4,10 +4,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
-import com.maximmakarov.comparator.core.ext.contentDeepEquals
+import com.maximmakarov.comparator.core.extensions.contentDeepEquals
 import com.maximmakarov.comparator.data.database.AppDatabase
 import com.maximmakarov.comparator.data.model.AttributeGroup
-import com.maximmakarov.comparator.util.getValue
+import com.maximmakarov.comparator.utils.getValue
 import org.junit.After
 import org.junit.Assert.assertTrue
 import org.junit.Before

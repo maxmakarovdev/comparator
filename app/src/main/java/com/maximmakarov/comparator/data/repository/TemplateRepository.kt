@@ -1,34 +1,36 @@
 package com.maximmakarov.comparator.data.repository
 
+import androidx.lifecycle.LiveData
 import com.maximmakarov.comparator.data.database.AppDatabase
 import com.maximmakarov.comparator.data.model.Attribute
 import com.maximmakarov.comparator.data.model.AttributeGroup
 import com.maximmakarov.comparator.data.model.Template
+import com.maximmakarov.comparator.domain.boundary.ITemplateRepository
 
 
-class TemplateRepository(private val db: AppDatabase) {
+class TemplateRepository(private val db: AppDatabase) : ITemplateRepository {
 
-    fun getTemplates() = db.templateDao().getTemplates()
+    override fun getTemplates(): LiveData<List<Template>> {
+        return db.templateDao().getTemplates()
+    }
 
-    fun getTemplateById(templateId: Int) = db.templateDao().getTemplateById(templateId)
+    override fun getTemplateById(templateId: Int): LiveData<Template> {
+        return db.templateDao().getTemplateById(templateId)
+    }
 
-    fun updateTemplate(templateId: Int, name: String) = db.templateDao().update(Template(templateId, name))
+    override fun saveTemplate(template: Template): Long {
+        return db.templateDao().insert(template)[0]
+    }
 
-    fun addTemplate(name: String, attributes: String) {
-        val templateId = db.templateDao().insert(Template(name = name))[0].toInt()
+    override fun saveGroup(group: AttributeGroup): Long {
+        return db.attributeGroupDao().insert(group)[0]
+    }
 
-        val strAttr = if (attributes.contains("##")) attributes else "##$name\n$attributes"
+    override fun saveAttributes(attributes: Array<Attribute>){
+        db.attributeDao().insert(*attributes)
+    }
 
-        strAttr.split("##").forEach { strGroup ->
-            var groupId = 0
-            strGroup.split("\n").filter { it.isNotEmpty() }.withIndex().map {
-                if (it.index == 0) {
-                    groupId = db.attributeGroupDao().insert(AttributeGroup(templateId = templateId, name = it.value))[0].toInt()
-                }
-                Attribute(groupId = groupId, name = it.value, isImportant = it.value.startsWith("*"))
-            }.drop(1).let {
-                db.attributeDao().insert(*it.toTypedArray())
-            }
-        }
+    override fun updateTemplate(template: Template) {
+        db.templateDao().update(template)
     }
 }

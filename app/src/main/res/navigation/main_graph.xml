@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/templatesFragment"
-        android:name="com.maximmakarov.comparator.template.TemplatesFragment"
+        android:name="com.maximmakarov.comparator.presentation.templates.list.TemplatesFragment"
         android:label="TemplatesFragment"
         tools:layout="@layout/templates_fragment">
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/itemsFragment"
-        android:name="com.maximmakarov.comparator.item.ItemsFragment"
+        android:name="com.maximmakarov.comparator.presentation.items.list.ItemsFragment"
         android:label="ItemsFragment">
         <argument
             android:name="template"
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/templateDetailFragment"
-        android:name="com.maximmakarov.comparator.template.detail.TemplateDetailFragment"
+        android:name="com.maximmakarov.comparator.presentation.templates.detail.TemplateDetailFragment"
         android:label="TemplateDetailFragment">
         <argument
             android:name="template"
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/formFragment"
-        android:name="com.maximmakarov.comparator.item.form.FormFragment"
+        android:name="com.maximmakarov.comparator.presentation.items.form.FormFragment"
         android:label="FormFragment">
         <argument
             android:name="item"
@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/comparisonFragment"
-        android:name="com.maximmakarov.comparator.item.comparison.ComparisonFragment"
+        android:name="com.maximmakarov.comparator.presentation.items.comparison.ComparisonFragment"
         android:label="ComparisonFragment">
         <argument
             android:name="items"
