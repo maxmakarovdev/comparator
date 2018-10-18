@@ -7,12 +7,10 @@ import androidx.lifecycle.ViewModel
 import com.maximmakarov.comparator.data.model.Template
 import com.maximmakarov.comparator.domain.interactor.ITemplateInteractor
 import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
 
 
-class TemplateDetailViewModel : ViewModel(), KoinComponent {
+class TemplateDetailViewModel(private val interactor: ITemplateInteractor) : ViewModel(), KoinComponent {
 
-    private val interactor: ITemplateInteractor by inject()
     private val inputData: MutableLiveData<Template> = MutableLiveData()
     private var template: Template? = null
     val templateData: LiveData<Template> =

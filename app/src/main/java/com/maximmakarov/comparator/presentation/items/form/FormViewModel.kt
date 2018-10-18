@@ -9,12 +9,10 @@ import com.maximmakarov.comparator.data.model.Item
 import com.maximmakarov.comparator.domain.interactor.IItemInteractor
 import com.maximmakarov.comparator.domain.model.AttributeData
 import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
 
 
-class FormViewModel : ViewModel(), KoinComponent {
+class FormViewModel(private val interactor: IItemInteractor) : ViewModel(), KoinComponent {
 
-    private val interactor: IItemInteractor by inject()
     private val inputData: MutableLiveData<Item> = MutableLiveData()
     private var item: Item? = null
     private var data: List<Pair<AttributeGroup, List<AttributeData>>>? = null

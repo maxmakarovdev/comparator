@@ -6,7 +6,6 @@ import android.view.MenuItem
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.google.android.material.tabs.TabLayout
 import com.maximmakarov.comparator.R
@@ -18,16 +17,15 @@ import com.maximmakarov.comparator.data.model.Item
 import com.maximmakarov.comparator.domain.model.AttributeData
 import kotlinx.android.synthetic.main.form_fragment.*
 import kotlinx.coroutines.experimental.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FormFragment : BaseFragment() {
 
     override val layoutId = R.layout.form_fragment
 
-    private lateinit var viewModel: FormViewModel
+    private val viewModel: FormViewModel by viewModel()
 
     override fun initViewModel() {
-        viewModel = ViewModelProviders.of(this).get(FormViewModel::class.java)
-
         viewModel.setArgs(FormFragmentArgs.fromBundle(arguments).item as Item)
     }
 

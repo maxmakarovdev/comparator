@@ -9,13 +9,11 @@ import com.maximmakarov.comparator.data.model.Template
 import com.maximmakarov.comparator.domain.interactor.IItemInteractor
 import com.maximmakarov.comparator.domain.interactor.ITemplateInteractor
 import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
 
 
-class ItemsViewModel : ViewModel(), KoinComponent {
+class ItemsViewModel(private val interactor: IItemInteractor,
+                     private val templateInteractor: ITemplateInteractor) : ViewModel(), KoinComponent {
 
-    private val interactor: IItemInteractor by inject()
-    private val templateInteractor: ITemplateInteractor by inject()
     private val inputData: MutableLiveData<Template> = MutableLiveData()
     private var template: Template? = null
     val itemsData: LiveData<List<Item>> =

@@ -4,7 +4,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation.findNavController
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.BaseFragment
@@ -14,17 +13,16 @@ import com.maximmakarov.comparator.core.extensions.visibleOrGone
 import com.maximmakarov.comparator.data.model.Template
 import kotlinx.android.synthetic.main.template_detail_fragment.*
 import kotlinx.coroutines.experimental.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class TemplateDetailFragment : BaseFragment() {
 
     override val layoutId = R.layout.template_detail_fragment
 
-    private lateinit var viewModel: TemplateDetailViewModel
+    private val viewModel: TemplateDetailViewModel by viewModel()
 
     override fun initViewModel() {
-        viewModel = ViewModelProviders.of(this).get(TemplateDetailViewModel::class.java)
-
         viewModel.setArgs(TemplateDetailFragmentArgs.fromBundle(arguments).template as Template)
     }
 

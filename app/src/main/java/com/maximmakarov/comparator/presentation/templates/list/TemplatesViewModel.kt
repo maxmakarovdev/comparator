@@ -5,11 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.maximmakarov.comparator.data.model.Template
 import com.maximmakarov.comparator.domain.interactor.ITemplateInteractor
 import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
 
-class TemplatesViewModel : ViewModel(), KoinComponent {
-
-    private val interactor: ITemplateInteractor by inject()
+class TemplatesViewModel(private val interactor: ITemplateInteractor) : ViewModel(), KoinComponent {
 
     val templatesData: LiveData<List<Template>> = interactor.getTemplates()
 }

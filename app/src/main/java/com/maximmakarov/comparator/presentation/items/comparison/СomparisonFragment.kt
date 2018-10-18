@@ -4,24 +4,21 @@ import android.view.LayoutInflater
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.BaseFragment
-import com.maximmakarov.comparator.core.extensions.getColorCompat
 import com.maximmakarov.comparator.data.model.Items
 import com.maximmakarov.comparator.domain.model.Row
 import kotlinx.android.synthetic.main.comparison_fragment.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ComparisonFragment : BaseFragment() {
 
     override val layoutId = R.layout.comparison_fragment
 
-    private lateinit var viewModel: ComparisonViewModel
+    private val viewModel: ComparisonViewModel by viewModel()
 
     override fun initViewModel() {
-        viewModel = ViewModelProviders.of(this).get(ComparisonViewModel::class.java)
-
         val items = ComparisonFragmentArgs.fromBundle(arguments).items
         viewModel.setArgs((items as Items).items)
     }

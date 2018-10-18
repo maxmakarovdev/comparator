@@ -2,7 +2,6 @@ package com.maximmakarov.comparator.presentation.items.form
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +10,7 @@ import com.maximmakarov.comparator.R
 import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.core.extensions.getDrawableCompat
 import kotlinx.android.synthetic.main.page_fragment.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class PageFragment : BaseFragment() {
@@ -27,12 +27,8 @@ class PageFragment : BaseFragment() {
 
     override val layoutId = R.layout.page_fragment
 
-    private lateinit var viewModel: FormViewModel
+    private val viewModel: FormViewModel by sharedViewModel(from = { parentFragment })
     private lateinit var adapter: PageAdapter
-
-    override fun initViewModel() {
-        viewModel = ViewModelProviders.of(parentFragment!!).get(FormViewModel::class.java) //using parent (FormFragment) scope
-    }
 
     override fun initView() {
         adapter = PageAdapter()

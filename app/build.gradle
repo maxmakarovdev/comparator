@@ -48,6 +48,7 @@ dependencies {
 
     //DI
     implementation 'org.koin:koin-android:1.0.1'
+    implementation 'org.koin:koin-androidx-viewmodel:1.0.1'
 
     //UI
     implementation 'com.google.android.material:material:1.0.0'

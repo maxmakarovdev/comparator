@@ -4,7 +4,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,18 +19,17 @@ import com.maximmakarov.comparator.data.model.Items
 import com.maximmakarov.comparator.data.model.Template
 import kotlinx.android.synthetic.main.items_fragment.*
 import kotlinx.coroutines.experimental.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ItemsFragment : BaseFragment() {
 
     override val layoutId = R.layout.items_fragment
 
-    private lateinit var viewModel: ItemsViewModel
+    private val viewModel: ItemsViewModel by viewModel()
     private lateinit var adapter: ItemAdapter
 
     override fun initViewModel() {
-        viewModel = ViewModelProviders.of(this).get(ItemsViewModel::class.java)
-
         viewModel.setArgs(ItemsFragmentArgs.fromBundle(arguments).template as Template)
     }
 

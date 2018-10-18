@@ -8,12 +8,10 @@ import com.maximmakarov.comparator.data.model.Item
 import com.maximmakarov.comparator.domain.interactor.IItemInteractor
 import com.maximmakarov.comparator.domain.model.Row
 import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
 
 
-class ComparisonViewModel : ViewModel(), KoinComponent {
+class ComparisonViewModel(private val interactor: IItemInteractor) : ViewModel(), KoinComponent {
 
-    private val interactor: IItemInteractor by inject()
     private val inputData: MutableLiveData<List<Item>> = MutableLiveData()
     private var items: List<Item>? = null
     val tableData: LiveData<List<Row>> =

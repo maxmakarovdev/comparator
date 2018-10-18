@@ -1,7 +1,6 @@
 package com.maximmakarov.comparator.presentation.templates.list
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,17 +10,14 @@ import com.maximmakarov.comparator.core.BaseFragment
 import com.maximmakarov.comparator.core.extensions.onClick
 import com.maximmakarov.comparator.data.model.Template
 import kotlinx.android.synthetic.main.templates_fragment.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TemplatesFragment : BaseFragment() {
 
     override val layoutId = R.layout.templates_fragment
 
-    private lateinit var viewModel: TemplatesViewModel
+    private val viewModel: TemplatesViewModel by viewModel()
     private lateinit var adapter: TemplateAdapter
-
-    override fun initViewModel() {
-        viewModel = ViewModelProviders.of(this).get(TemplatesViewModel::class.java)
-    }
 
     override fun initView() {
         setTitle(R.string.templates_title)
