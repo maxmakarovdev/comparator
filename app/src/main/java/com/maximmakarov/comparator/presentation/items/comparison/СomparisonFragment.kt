@@ -10,7 +10,7 @@ import com.maximmakarov.comparator.data.model.Items
 import com.maximmakarov.comparator.domain.model.Row
 import kotlinx.android.synthetic.main.comparison_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
+import com.maximmakarov.comparator.core.extensions.getColorCompat
 
 class ComparisonFragment : BaseFragment() {
 
