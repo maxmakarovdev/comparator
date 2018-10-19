@@ -8,11 +8,12 @@ import com.maximmakarov.comparator.data.model.GroupWithAttributes
 import com.maximmakarov.comparator.data.model.Item
 import com.maximmakarov.comparator.data.model.ItemAttrData
 import com.maximmakarov.comparator.domain.boundary.IItemRepository
+import com.maximmakarov.comparator.domain.boundary.ITemplateRepository
 import com.maximmakarov.comparator.domain.model.AttributeData
 import com.maximmakarov.comparator.domain.model.Row
 
 
-class ItemInteractor(private val repository: IItemRepository) : IItemInteractor {
+class ItemInteractor(private val repository: IItemRepository, private val templateRepository: ITemplateRepository) : IItemInteractor {
 
     override fun getItems(templateId: Int): LiveData<List<Item>> {
         return repository.getItems(templateId)
@@ -85,7 +86,7 @@ class ItemInteractor(private val repository: IItemRepository) : IItemInteractor 
                 }
             }
 
-            addSource(repository.getGroupsWithAttributes(templateId)) {
+            addSource(templateRepository.getGroupsWithAttributes(templateId)) {
                 groupsWithAttributes = it
                 update()
             }

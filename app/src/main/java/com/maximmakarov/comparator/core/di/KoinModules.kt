@@ -20,16 +20,22 @@ import org.koin.dsl.module.module
 
 val appModule = module {
     single { this }
-    single { AppDatabase.buildDatabase(get()) }
 }
 
 val dataModule = module {
-    single { TemplateRepository(get()) as ITemplateRepository }
-    single { ItemRepository(get()) as IItemRepository }
+    single { AppDatabase.buildDatabase(get()) }
+    single { get<AppDatabase>().templateDao() }
+    single { get<AppDatabase>().attributeGroupDao() }
+    single { get<AppDatabase>().attributeDao() }
+    single { get<AppDatabase>().itemDao() }
+    single { get<AppDatabase>().itemAttrDataDao() }
+
+    single { TemplateRepository(get(), get(), get()) as ITemplateRepository }
+    single { ItemRepository(get(), get()) as IItemRepository }
 }
 
 val domainModule = module {
-    single { ItemInteractor(get()) as IItemInteractor }
+    single { ItemInteractor(get(), get()) as IItemInteractor }
     single { TemplateInteractor(get()) as ITemplateInteractor }
 }
 

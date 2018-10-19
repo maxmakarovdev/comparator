@@ -10,8 +10,6 @@ interface IItemRepository {
 
     fun getItems(templateId: Int): LiveData<List<Item>>
 
-    fun getGroupsWithAttributes(templateId: Int): LiveData<List<GroupWithAttributes>>
-
     fun getItemsDetails(itemsIds: Array<Int>): LiveData<List<ItemAttrData>>
 
     fun saveItem(item: Item): Long
