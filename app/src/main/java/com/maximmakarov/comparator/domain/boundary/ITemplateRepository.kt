@@ -18,7 +18,7 @@ interface ITemplateRepository {
 
     fun saveGroup(group: AttributeGroup): Long
 
-    fun saveAttributes(attributes: Array<Attribute>)
+    fun saveAttributes(attributes: Array<Attribute>): List<Long>
 
     fun updateTemplate(template: Template)
 }

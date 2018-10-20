@@ -35,8 +35,8 @@ class TemplateRepository(private val templateDao: TemplateDao,
         return attributeGroupDao.insert(group)[0]
     }
 
-    override fun saveAttributes(attributes: Array<Attribute>){
-        attributeDao.insert(*attributes)
+    override fun saveAttributes(attributes: Array<Attribute>): List<Long> {
+        return attributeDao.insert(*attributes)
     }
 
     override fun updateTemplate(template: Template) {
