@@ -17,11 +17,6 @@ import com.maximmakarov.comparator.presentation.templates.list.TemplatesViewMode
 import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 
-
-val appModule = module {
-    single { this }
-}
-
 val dataModule = module {
     single { AppDatabase.buildDatabase(get()) }
     single { get<AppDatabase>().templateDao() }
@@ -35,8 +30,8 @@ val dataModule = module {
 }
 
 val domainModule = module {
-    single { ItemInteractor(get(), get()) as IItemInteractor }
     single { TemplateInteractor(get()) as ITemplateInteractor }
+    single { ItemInteractor(get(), get()) as IItemInteractor }
 }
 
 val presentationModule = module {
