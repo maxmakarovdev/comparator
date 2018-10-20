@@ -6,7 +6,7 @@ import com.maximmakarov.comparator.data.model.Template
 import com.maximmakarov.comparator.domain.boundary.ITemplateRepository
 import com.maximmakarov.comparator.domain.interactor.ITemplateInteractor
 import com.maximmakarov.comparator.domain.interactor.TemplateInteractor
-import com.maximmakarov.comparator.utils.getValue
+import com.maximmakarov.comparator.utils.getLiveDataValue
 import com.nhaarman.mockitokotlin2.*
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -48,7 +48,7 @@ class TemplateInteractorTest {
         whenever(repository.getTemplates())
                 .thenReturn(MutableLiveData<List<Template>>().apply { postValue(testTemplates) })
 
-        assertTrue(getValue(templateInteractor.getTemplates()) == testTemplates)
+        assertTrue(getLiveDataValue(templateInteractor.getTemplates()) == testTemplates)
     }
 
     @Test
@@ -67,7 +67,7 @@ class TemplateInteractorTest {
         whenever(repository.getTemplateById(testTemplateId))
                 .thenReturn(MutableLiveData<Template>().apply { postValue(testTemplates[0]) })
 
-        assertTrue(getValue(templateInteractor.getTemplateById(testTemplateId)) == testTemplates[0])
+        assertTrue(getLiveDataValue(templateInteractor.getTemplateById(testTemplateId)) == testTemplates[0])
     }
 
     @Test

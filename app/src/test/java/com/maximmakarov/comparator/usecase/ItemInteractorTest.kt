@@ -9,7 +9,7 @@ import com.maximmakarov.comparator.domain.boundary.IItemRepository
 import com.maximmakarov.comparator.domain.boundary.ITemplateRepository
 import com.maximmakarov.comparator.domain.interactor.IItemInteractor
 import com.maximmakarov.comparator.domain.interactor.ItemInteractor
-import com.maximmakarov.comparator.utils.getValue
+import com.maximmakarov.comparator.utils.getLiveDataValue
 import com.nhaarman.mockitokotlin2.*
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -53,7 +53,7 @@ class ItemInteractorTest {
         whenever(repository.getItems(testTemplateId))
                 .thenReturn(MutableLiveData<List<Item>>().apply { postValue(testItems) })
 
-        assertTrue(getValue(itemInteractor.getItems(testTemplateId)) == testItems)
+        assertTrue(getLiveDataValue(itemInteractor.getItems(testTemplateId)) == testItems)
     }
 
     @Test
@@ -72,7 +72,7 @@ class ItemInteractorTest {
         whenever(templateRepository.getGroupsWithAttributes(testTemplateId))
                 .thenReturn(MutableLiveData<List<GroupWithAttributes>>().apply { postValue(testGroupWithAttributes) })
 
-        assertTrue(getValue(itemInteractor.getItemData(testTemplateId, null))
+        assertTrue(getLiveDataValue(itemInteractor.getItemData(testTemplateId, null))
                 [0].second[0].attribute.name == testAttributes[0].name)
     }
 
@@ -97,7 +97,7 @@ class ItemInteractorTest {
         whenever(repository.getItemsDetails(arrayOf(testItems[0].id!!)))
                 .thenReturn(MutableLiveData<List<ItemAttrData>>().apply { postValue(testAttributesData.filter { it.itemId == testItems[0].id!! }) })
 
-        assertTrue(getValue(itemInteractor.getItemData(testTemplateId, testItems[0].id!!))
+        assertTrue(getLiveDataValue(itemInteractor.getItemData(testTemplateId, testItems[0].id!!))
                 [0].second[0].data.answer == testItemsData[0].second[0].second[0].data.answer)
     }
 
@@ -122,15 +122,15 @@ class ItemInteractorTest {
         whenever(repository.getItemsDetails(testItems.map { it.id!! }.toTypedArray()))
                 .thenReturn(MutableLiveData<List<ItemAttrData>>().apply { postValue(testAttributesData) })
 
-        assertTrue(getValue(itemInteractor.getItemsTransformedData(testTemplateId, testItems))
+        assertTrue(getLiveDataValue(itemInteractor.getItemsTransformedData(testTemplateId, testItems))
                 [0].cells[0].text.isEmpty()) //(row,cell)
-        assertTrue(getValue(itemInteractor.getItemsTransformedData(testTemplateId, testItems))
+        assertTrue(getLiveDataValue(itemInteractor.getItemsTransformedData(testTemplateId, testItems))
                 [0].cells[1].text == testItems[0].name)
-        assertTrue(getValue(itemInteractor.getItemsTransformedData(testTemplateId, testItems))
+        assertTrue(getLiveDataValue(itemInteractor.getItemsTransformedData(testTemplateId, testItems))
                 [1].cells[0].text == testGroup.name)
-        assertTrue(getValue(itemInteractor.getItemsTransformedData(testTemplateId, testItems))
+        assertTrue(getLiveDataValue(itemInteractor.getItemsTransformedData(testTemplateId, testItems))
                 [2].cells[0].text == testItemsData[0].second[0].second[0].attribute.name)
-        assertTrue(getValue(itemInteractor.getItemsTransformedData(testTemplateId, testItems))
+        assertTrue(getLiveDataValue(itemInteractor.getItemsTransformedData(testTemplateId, testItems))
                 [2].cells[1].text == testItemsData[0].second[0].second[0].data.answer)
     }
 
