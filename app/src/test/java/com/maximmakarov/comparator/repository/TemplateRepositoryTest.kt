@@ -8,6 +8,7 @@ import com.maximmakarov.comparator.data.dao.TemplateDao
 import com.maximmakarov.comparator.data.model.GroupWithAttributes
 import com.maximmakarov.comparator.data.model.Template
 import com.maximmakarov.comparator.data.repository.TemplateRepository
+import com.maximmakarov.comparator.domain.boundary.ITemplateRepository
 import com.nhaarman.mockitokotlin2.*
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -21,7 +22,7 @@ import org.junit.runners.JUnit4
 class TemplateRepositoryTest {
     @get:Rule var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var templateRepository: TemplateRepository
+    private lateinit var templateRepository: ITemplateRepository
 
     private lateinit var templateDao: TemplateDao
     private lateinit var attributeGroupDao: AttributeGroupDao

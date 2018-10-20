@@ -29,7 +29,7 @@ class ItemInteractor(private val repository: IItemRepository, private val templa
         return Transformations.map(getItemsData(templateId, items.map { it.id!! })) { transformItemData(items, it) }
     }
 
-    private fun transformItemData(items: List<Item>, data: List<Pair<Int, List<Pair<AttributeGroup, List<AttributeData>>>>>): List<Row> {
+    private fun transformItemData(items: List<Item>, data: List<Pair<Int, List<Pair<AttributeGroup, List<AttributeData>>>>>): List<Row> { //todo add mappers
         val tableData = mutableListOf<Row>()
 
         tableData.add(Row().apply {

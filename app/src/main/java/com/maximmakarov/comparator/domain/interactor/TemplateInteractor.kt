@@ -22,9 +22,9 @@ class TemplateInteractor(private val repository: ITemplateRepository) : ITemplat
 
         val strAttr = if (attributes.contains("##")) attributes else "##$name\n$attributes"
 
-        strAttr.split("##").forEach { strGroup ->
+        strAttr.split("##").filter { it.isNotBlank() }.forEach { strGroup ->
             var groupId = 0
-            strGroup.split("\n").filter { it.isNotEmpty() }.withIndex().map {
+            strGroup.split("\n").filter { it.isNotBlank() }.withIndex().map {
                 if (it.index == 0) {
                     groupId = repository.saveGroup(AttributeGroup(templateId = templateId, name = it.value)).toInt()
                 }

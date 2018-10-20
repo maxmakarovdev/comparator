@@ -7,6 +7,7 @@ import com.maximmakarov.comparator.data.dao.ItemDao
 import com.maximmakarov.comparator.data.model.Item
 import com.maximmakarov.comparator.data.model.ItemAttrData
 import com.maximmakarov.comparator.data.repository.ItemRepository
+import com.maximmakarov.comparator.domain.boundary.IItemRepository
 import com.nhaarman.mockitokotlin2.*
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -20,7 +21,7 @@ class ItemRepositoryTest {
 
     @get:Rule var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var itemRepository: ItemRepository
+    private lateinit var itemRepository: IItemRepository
 
     private lateinit var itemDao: ItemDao
     private lateinit var attributeDataDao: ItemAttrDataDao
